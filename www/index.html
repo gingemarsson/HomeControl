@@ -1,0 +1,155 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	
+	<title>Home Control.</title>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
+	
+	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script>
+		$(document).bind("mobileinit", function(){
+		  $.mobile.defaultPageTransition = "none";
+		});
+
+	</script>
+	<script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+	
+	
+	<link rel="stylesheet" href="style.css" />
+	<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+</head> 
+<body> 
+
+
+
+
+<div data-role="page" id="simpleControls">
+
+	<div data-role="header" data-position="fixed" data-id="mainheader">
+		<h1>Home Control.</h1>
+		<!--<a href="#menu" class="ui-btn-right" data-transition="slidedown" data-rel="dialog">Menu</a>-->
+	</div><!-- /header -->
+
+	<div data-role="content">
+	
+		<h1>Mina Lampor</h1>
+		
+		<p class="label">Skärmbelysning</p>
+		<div class="ui-grid-a doublebutton">
+			<div class="ui-block-a"><a href="#" data-cmd='[{"cmd":"on","id":"ScreenLamp"}]' class="buttonLeft" data-role="button">På</a></div>
+			<div class="ui-block-b"><a href="#" data-cmd='[{"cmd":"off","id":"ScreenLamp"}]' class="buttonRight" data-role="button">Av</a></div>
+		</div>                                                 
+		<p class="label">Skrivbordsbelysning</p>               
+		<div class="ui-grid-a doublebutton">                   
+			<div class="ui-block-a"><a href="#" data-cmd='[{"cmd":"on","id":"DesktopLamp"}]' class="buttonLeft" data-role="button">På</a></div>
+			<div class="ui-block-b"><a href="#" data-cmd='[{"cmd":"off","id":"DesktopLamp"}]' class="buttonRight" data-role="button">Av</a></div>
+		</div>                                                 
+		<p class="label">Sänglampa</p>                         
+		<div class="ui-grid-a doublebutton">                   
+			<div class="ui-block-a"><a href="#" data-cmd='[{"cmd":"on","id":"BedLamp"}]' class="buttonLeft" data-role="button">På</a></div>
+			<div class="ui-block-b"><a href="#" data-cmd='[{"cmd":"off","id":"BedLamp"}]' class="buttonRight" data-role="button">Av</a></div>
+		</div>
+		
+		<a href="#" data-cmd='[{"cmd":"off","id":"ScreenLamp"},{"cmd":"off","id":"BedLamp"},{"cmd":"off","id":"DesktopLamp"}]' data-role="button">Stäng av allt</a>
+		
+		<h1>Övrigt</h1>
+		
+		<p class="label">Fläkt</p>
+		<div class="ui-grid-a doublebutton">
+			<div class="ui-block-a"><a href="#" data-cmd='[{"cmd":"on","id":"FanDevice"}]' class="buttonLeft" data-role="button">På</a></div>
+			<div class="ui-block-b"><a href="#" data-cmd='[{"cmd":"off","id":"FanDevice"}]' class="buttonRight" data-role="button">Av</a></div>
+		</div>
+		<p class="label">Halllampa</p>
+		<div class="ui-grid-a doublebutton">
+			<div class="ui-block-a"><a href="#" data-cmd='[{"cmd":"on","id":"HallLamp"}]' class="buttonLeft" data-role="button">På</a></div>
+			<div class="ui-block-b"><a href="#" data-cmd='[{"cmd":"off","id":"HallLamp"}]' class="buttonRight" data-role="button">Av</a></div>
+		</div>
+		
+		<h1>Macros</h1>
+		
+		<a href="#" data-cmd='[{"cmd":"on","id":"BedLamp"},{"cmd":"off","id":"ScreenLamp"},{"cmd":"off","id":"DesktopLamp"},{"cmd":"off","id":"FanDevice"}]' data-role="button">Bedtime</a>
+		<a href="#" data-cmd='[{"cmd":"on","id":"FanDevice"},{"cmd":"off","id":"FanDevice", "delay": "15"}]' data-role="button">Fläkt i 15 sec</a>
+		<a href="#" data-cmd='[{"cmd":"on","id":"ScreenLamp", "delay": "1"},{"cmd":"off","id":"ScreenLamp", "delay": "1.2"},{"cmd":"on","id":"ScreenLamp", "delay": "1.4"},{"cmd":"off","id":"ScreenLamp", "delay": "1.6"},{"cmd":"on","id":"ScreenLamp", "delay": "1.8"},{"cmd":"off","id":"ScreenLamp", "delay": "2"}]' data-role="button">Crazy skärmbelysning</a>
+
+		<p  class="description" id="tellstickResult">Resultat: n/a</p>
+	
+	</div><!-- /content -->
+	
+</div><!-- /page "simpleControls" -->
+
+<div data-role="page" id="advancedControls">
+
+	<div data-role="header" data-position="fixed" data-id="mainheader">
+		<h1>Home Control.</h1>
+		<a href="#menu" class="ui-btn-right" data-transition="slidedown" data-rel="dialog">Menu</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+	
+		<h1>Avancerad kontroll</h1>
+		
+		<label for="device" class="select">Enhet:</label>
+		<select name="device" id="device">
+			<option value="121">Skärmlampa</option>
+			<option value="110">Sänglampa</option>
+			<option value="111">Skrivbordslampa</option>
+		</select>
+
+		<label for="command" class="select">Kommando:</label>
+		<select name="command" id="command">
+			<option value="on">På</option>
+			<option value="off">Av</option>
+		</select>
+		
+		<label for="time" class="select">Fördröjning:</label>
+		<select name="time" id="time">
+			<option value="0">Now</option>
+			<option value="10">10 sec</option>
+			<option value="20">20 sec</option>
+			<option value="30">30 sec</option>
+			<option value="60">1 min</option>
+			<option value="120">2 min</option>
+			<option value="180">3 min</option>
+			<option value="300">5 min</option>
+			<option value="600">10 min</option>
+			<option value="900">15 min</option>
+			<option value="1800">30 min</option>
+			<option value="3600">1 h</option>
+		</select>
+
+		<br />
+				
+		<a href="#" data-role="button" id="all-off">Genomför</a>	
+	</div><!-- /content -->
+	
+</div><!-- /page "advancedControls"-->
+
+<div data-role="page" id="menu">
+	<div data-role="content">
+	
+		
+		<h1 class="header">Home Control.</h1>
+	
+		<div class="ui-grid-a doublebutton fourbuttonsTop">
+			<div class="ui-block-a"><a href="#simpleControls"	data-transition="slidedown" data-direction="reverse" class="buttonLeft" data-role="button">Simpla <br /> Kontroller</a></div>
+			<div class="ui-block-b"><a href="#advancedControls"	data-transition="slidedown" data-direction="reverse" class="buttonRight" data-role="button">Avancerad <br /> Kontroll</a></div>
+		</div>
+		<div class="ui-grid-a doublebutton fourbuttonsBot">
+			<div class="ui-block-a"><a href="#" data-transition="slidedown" data-direction="reverse" class="buttonLeft" data-role="button">Planerade <br /> händelser</a></div>
+			<div class="ui-block-b"><a href="#" data-transition="slidedown" data-direction="reverse" class="buttonRight" data-role="button">Lägg till  <br /> händelser</a></div>
+		</div>
+	
+		<p class="description">Made by Gabriel Ingemarsson</p>
+	
+	</div><!-- /content -->
+	
+</div><!-- /page "menu"-->
+
+<script src="script.js"></script>
+</body>
+</html>
+
+ 

@@ -1,0 +1,36 @@
+.doublebutton {padding: 0;}
+.doublebutton .buttonLeft {border-top-right-radius: 0;border-bottom-right-radius: 0; margin-right: 0; }
+.doublebutton .buttonRight {border-top-left-radius: 0;border-bottom-left-radius: 0; margin-left: 0; }
+
+.fourbuttonsTop .buttonLeft {margin-bottom: 0; border-bottom-left-radius: 0;}
+.fourbuttonsTop .buttonRight {margin-bottom: 0; border-bottom-right-radius: 0;}
+.fourbuttonsBot .buttonLeft {margin-top: 0; border-top-left-radius: 0;}
+.fourbuttonsBot .buttonRight {margin-top: 0; border-top-right-radius: 0;}
+
+[data-role="button"] {padding: 8px 0;}
+div.ui-select span.ui-btn-text {padding: 8px;}
+
+.label {margin: 0;}
+
+.description {
+	border: 1px solid #CCC; 
+	background: #FDFDFD; 
+	padding: 10px; 
+	text-align: center; 
+	font-style: italic;
+}
+
+div[data-role="header"] h1.ui-title,  .header{font-family: "Bree Serif", sans-serif; font-size: 1.5em; margin: .2em;}
+
+ul[data-role="listview"] li  a {padding: 15px !important; } 
+
+[data-role="page"] h1 {font-size: 1.2em; }
+
+
+.ui-dialog-contain {
+	width: 92.5%;
+	max-width: 500px;
+	margin: 10% auto 15px auto;
+	padding: 0;
+	position: relative;
+}
