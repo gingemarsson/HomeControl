@@ -29,8 +29,9 @@
 <div data-role="page" id="simpleControls">
 
 	<div data-role="header" data-position="fixed" data-id="mainheader">
+		<a href="#menu" data-transition="slidedown" data-rel="dialog" class="box-shadow-menu">&nbsp;</a>
 		<h1>Home Control.</h1>
-		<!--<a href="#menu" class="ui-btn-right" data-transition="slidedown" data-rel="dialog">Menu</a>-->
+		
 	</div><!-- /header -->
 
 	<div data-role="content">
@@ -67,6 +68,11 @@
 			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"HallLamp"}]' class="buttonLeft" data-role="button">På</a></div>
 			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"HallLamp"}]' class="buttonRight" data-role="button">Av</a></div>
 		</div>
+		<p class="label">Sofias ljusslinga</p>
+		<div class="ui-grid-a doublebutton">
+			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"LightropeLamp"}]' class="buttonLeft" data-role="button">På</a></div>
+			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"LightropeLamp"}]' class="buttonRight" data-role="button">Av</a></div>
+		</div>
 		
 		<h1>Macros</h1>
 		
@@ -77,14 +83,33 @@
 		<p  class="description" id="tellstickResult">Resultat: n/a</p>
 	
 	</div><!-- /content -->
-	
 </div><!-- /page "simpleControls" -->
+
+<div data-role="page" id="sofia">
+
+	<div data-role="header" data-position="fixed" data-id="mainheader">
+		<a href="#menu" data-transition="slidedown" data-rel="dialog" class="box-shadow-menu">&nbsp;</a>
+		<h1>Home Control.</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<h1>Sofias lampor</h1>
+		<p class="label">Ljusslinga</p>
+		<div class="ui-grid-a doublebutton">
+			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"LightropeLamp"}]' class="buttonLeft" data-role="button">På</a></div>
+			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"LightropeLamp"}]' class="buttonRight" data-role="button">Av</a></div>
+		</div>
+
+		<p  class="description" id="tellstickResult">Resultat: n/a</p>
+	
+	</div><!-- /content -->
+</div><!-- /page "sofia" -->
 
 <div data-role="page" id="advancedControls">
 
 	<div data-role="header" data-position="fixed" data-id="mainheader">
+		<a href="#menu" data-transition="slidedown" data-rel="dialog" class="box-shadow-menu">&nbsp;</a>
 		<h1>Home Control.</h1>
-		<a href="#menu" class="ui-btn-right" data-transition="slidedown" data-rel="dialog">Menu</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
@@ -92,10 +117,13 @@
 		<h1>Avancerad kontroll</h1>
 		
 		<label for="device" class="select">Enhet:</label>
-		<select name="device" id="device">
-			<option value="121">Skärmlampa</option>
-			<option value="110">Sänglampa</option>
-			<option value="111">Skrivbordslampa</option>
+		<select name="device" id="id">
+			<option value="ScreenLamp">Skärmlampa</option>
+			<option value="DesktopLamp">Skrivbordslampa</option>
+			<option value="BedLamp">Sänglampa</option>
+			<option value="HallLamp">Halllampa</option>
+			<option value="LightropeLamp">Sofias ljusslinga</option>
+			<option value="FanDevice">Fläkten</option>
 		</select>
 
 		<label for="command" class="select">Kommando:</label>
@@ -105,7 +133,7 @@
 		</select>
 		
 		<label for="time" class="select">Fördröjning:</label>
-		<select name="time" id="time">
+		<select name="time" id="delay">
 			<option value="0">Now</option>
 			<option value="10">10 sec</option>
 			<option value="20">20 sec</option>
@@ -116,13 +144,11 @@
 			<option value="300">5 min</option>
 			<option value="600">10 min</option>
 			<option value="900">15 min</option>
-			<option value="1800">30 min</option>
-			<option value="3600">1 h</option>
 		</select>
 
 		<br />
 				
-		<a href="#" data-role="button" id="all-off">Genomför</a>	
+		<a href="#" data-role="button" id="doAdvancedCommand">Genomför</a>	
 	</div><!-- /content -->
 	
 </div><!-- /page "advancedControls"-->
@@ -132,16 +158,21 @@
 	
 		
 		<h1 class="header">Home Control.</h1>
-	
+		
+		<div data-role="controlgroup">
+			<a href="#simpleControls" data-role="button">Alla kontroller</a>
+			<a href="#sofia" data-role="button">Sofias kontroller</a>
+		</div>
+		
 		<div class="ui-grid-a doublebutton fourbuttonsTop">
-			<div class="ui-block-a"><a href="#simpleControls"	data-transition="slidedown" data-direction="reverse" class="buttonLeft" data-role="button">Simpla <br /> Kontroller</a></div>
-			<div class="ui-block-b"><a href="#advancedControls"	data-transition="slidedown" data-direction="reverse" class="buttonRight" data-role="button">Avancerad <br /> Kontroll</a></div>
+				<div class="ui-block-a"><a href="#advancedControls"       data-transition="slidedown" data-direction="reverse" class="buttonLeft" data-role="button">Avancerad <br /> Kontroll</a></div>
+				<div class="ui-block-b"><a href="#" data-transition="slidedown" data-direction="reverse" class="buttonRight" data-role="button">Om <br /> sidan</a></div>
 		</div>
 		<div class="ui-grid-a doublebutton fourbuttonsBot">
-			<div class="ui-block-a"><a href="#" data-transition="slidedown" data-direction="reverse" class="buttonLeft" data-role="button">Planerade <br /> händelser</a></div>
-			<div class="ui-block-b"><a href="#" data-transition="slidedown" data-direction="reverse" class="buttonRight" data-role="button">Lägg till  <br /> händelser</a></div>
+				<div class="ui-block-a"><a href="#" data-transition="slidedown" data-direction="reverse" class="buttonLeft" data-role="button">Planerade <br /> händelser</a></div>
+				<div class="ui-block-b"><a href="#" data-transition="slidedown" data-direction="reverse" class="buttonRight" data-role="button">Lägg till  <br /> händelser</a></div>
 		</div>
-	
+
 		<p class="description">Made by Gabriel Ingemarsson</p>
 	
 	</div><!-- /content -->

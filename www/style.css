@@ -34,3 +34,21 @@ ul[data-role="listview"] li  a {padding: 15px !important; }
 	padding: 0;
 	position: relative;
 }
+
+/*For menu icon*/
+.box-shadow-menu {
+  position: relative;
+  width: 2.5em;
+}
+.box-shadow-menu:before {
+  content: "";
+  position: absolute;
+  left: 0.6em;
+  top: 0.48em;
+  width: 1.3em;
+  height: 0.2em;
+  background: white;
+  box-shadow: 
+    0 0.4em 0 0 white,
+    0 0.75em 0 0 white;
+}
