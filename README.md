@@ -14,7 +14,7 @@ This project uses these applications:
 - Simple website as user interface *(2013-10-04)*
 - Delayed commands *(2013-10-07)*
 - Planned commands *(2013-10-20)*
-- UI for planning "Planned commands"
+- UI for planning "Planned commands" *(2013-11-08)*
 - UI to view and remove "Planned commands"
 - Website made for computers/bigger screens
 - Editing of "Planned commands"

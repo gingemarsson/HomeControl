@@ -26,7 +26,6 @@ ul[data-role="listview"] li  a {padding: 15px !important; }
 
 [data-role="page"] h1 {font-size: 1.2em; }
 
-
 .ui-dialog-contain {
 	width: 92.5%;
 	max-width: 500px;
@@ -34,6 +33,8 @@ ul[data-role="listview"] li  a {padding: 15px !important; }
 	padding: 0;
 	position: relative;
 }
+
+input[type="text"] {font-size: 1.3em;}
 
 /*For menu icon*/
 .box-shadow-menu {

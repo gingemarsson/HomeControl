@@ -3,6 +3,8 @@ var app = express();
 var exec = require('child_process').exec;
 var http = require('http');
 
+var database = new Database("127.0.0.1", 5984);
+
 //------------------------
 // WEBSERVER
 //------------------------
@@ -30,8 +32,8 @@ app.use("/cmd" ,function(req, res, next){
 
 //MANUALLY TRIGGER DATABSE CHECK
 app.use("/DB-check" ,function(req, res, next){
-	CheckDB();
-	res.send("Database checked");
+	database.CheckDB();
+	res.send("[INFO] Database checked");
 });
 
 
@@ -41,7 +43,11 @@ app.use("/", function(req, res, next) {
 	else {res.sendfile(__dirname + "/www/index.html");}
 ;});
 
-app.listen(80); //the port you want to use
+//Bind webbserver to port 80
+app.listen(80); 
+
+//Check database every 10 sec
+setInterval( function(){database.CheckDB()}, 10000);
 
 //------------------------
 // ACTION CLASS
@@ -65,54 +71,83 @@ function Action (command, id, delay, timedate) {
 				console.log("[CMD] tdtool --" + command + " " + id); //Log command
 				exec("tdtool --" + command + " " + id); //Execute command
 			}, (delay * 1000)); //Times 1000 to make ms
+			return true;
 		}
 		else if (addToDB){
-			var options = {
-				hostname: '127.0.0.1',
-				port: 5984,
-				path: '/actions',
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				}
-			};
-			var req = http.request(options, function(res) {
-				res.setEncoding('utf8');
-				res.on('data', function (chunk) {
-					console.log("[DB] " + chunk);
-				});
-			});
-			req.write(JSON.stringify(this));
-			req.end()
+			database.AddToDB(this);
 		}
+		return false;
 	}
 }
 
-function CheckDB () {
-	var data = "";
-	var options = {
-		hostname: "127.0.0.1",
-		port: 5984,
-		path: "/actions/_design/homecontrol/_view/byDate",
-		method: "GET",
-	};
-	var req = http.request(options, function(res) {
-		res.setEncoding("utf8");
+//------------------------
+// Database CLASS
+//------------------------
+
+function Database (hostname, port) {
+	
+	this.options = {
+		'hostname': hostname,
+		'port': port,
+		};
+	
+	//Functions
+	this.CheckDB = function() {
+		this.options.path = "/actions/_design/homecontrol/_view/byDate";
+		this.options.method = "GET";
+
+		var self = this;
+		data = "";
 		
-		res.on("data", function (chunk) {
-			data += chunk;
-		});
-		
-		res.on('end', function () {
-			console.log("[INFO]: Database checked");
-			actionsRaw = JSON.parse(data).rows;
-			actionsRaw.forEach(function(actionRaw) {
-				action = new Action(actionRaw.value.command, actionRaw.value.id, actionRaw.value.delay, actionRaw.value.timedate);
-				action.execute(false);
+		console.log("[INFO]: Database check initiated");
+		req = http.request(this.options, function(res) {
+			res.setEncoding("utf8");
+			
+			res.on("data", function (chunk) {
+				data += chunk;
+			});
+			
+			res.on('end', function () {
+				actionsRaw = JSON.parse(data).rows;
+				actionsRaw.forEach(function(actionRaw) {
+					action = new Action(actionRaw.value.command, actionRaw.value.id, actionRaw.value.delay, actionRaw.value.timedate);
+					executed = action.execute(false);
+					if (executed) {
+						self.RemoveFromDB(actionRaw.id, actionRaw.value.rev);
+					}
+				});
 			});
 		});
-	});
-	req.end()
+		req.end()
+		console.log("[INFO]: Database check done");
+	}
+	
+	this.RemoveFromDB = function(DatabaseId, rev) {
+		this.options.path = "/actions/" + DatabaseId + "?rev=" + rev;
+		this.options.method = "DELETE";
+		
+		req = http.request(this.options, function(res) {
+			res.setEncoding("utf8");
+			
+			res.on('end', function () {
+				console.log("[DB]: CMD removed from DB");
+			});
+		});
+		req.end()
+	}
+	
+	this.AddToDB = function(action){
+		this.options.path = "/actions";
+		this.options.method = "POST";
+		this.options.headers = {'Content-Type': 'application/json'}
+		
+		var req = http.request(this.options, function(res) {
+			res.setEncoding('utf8');
+			res.on('data', function (chunk) {
+				console.log("[DB] CMD added to DB:" + chunk);
+			});
+		});
+		req.write(JSON.stringify(action));
+		req.end()
+	}
 }
-//Check Database every minute
-setInterval( CheckDB, 60000);

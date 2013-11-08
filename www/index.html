@@ -9,12 +9,6 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
 	
 	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-	<script>
-		$(document).bind("mobileinit", function(){
-		  $.mobile.defaultPageTransition = "none";
-		});
-
-	</script>
 	<script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
 	
 	
@@ -117,7 +111,7 @@
 		<h1>Avancerad kontroll</h1>
 		
 		<label for="device" class="select">Enhet:</label>
-		<select name="device" id="id">
+		<select name="AC-device" id="AC-id">
 			<option value="ScreenLamp">Skärmlampa</option>
 			<option value="DesktopLamp">Skrivbordslampa</option>
 			<option value="BedLamp">Sänglampa</option>
@@ -126,14 +120,14 @@
 			<option value="FanDevice">Fläkten</option>
 		</select>
 
-		<label for="command" class="select">Kommando:</label>
-		<select name="command" id="command">
+		<label for="AC-command" class="select">Kommando:</label>
+		<select name="AC-command" id="AC-command">
 			<option value="on">På</option>
 			<option value="off">Av</option>
 		</select>
 		
-		<label for="time" class="select">Fördröjning:</label>
-		<select name="time" id="delay">
+		<label for="AC-delay" class="select">Fördröjning:</label>
+		<select name="AC-delay" id="AC-delay">
 			<option value="0">Now</option>
 			<option value="10">10 sec</option>
 			<option value="20">20 sec</option>
@@ -153,6 +147,46 @@
 	
 </div><!-- /page "advancedControls"-->
 
+<div data-role="page" id="addPlannedAction">
+
+	<div data-role="header" data-position="fixed" data-id="mainheader">
+		<a href="#menu" data-transition="slidedown" data-rel="dialog" class="box-shadow-menu">&nbsp;</a>
+		<h1>Home Control.</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+	
+		<h1>Lägg till planerad händelse:</h1>
+		
+		<label for="AP-device" class="select">Enhet:</label>
+		<select name="AP-device" id="AP-id">
+			<option value="ScreenLamp">Skärmlampa</option>
+			<option value="DesktopLamp">Skrivbordslampa</option>
+			<option value="BedLamp">Sänglampa</option>
+			<option value="HallLamp">Halllampa</option>
+			<option value="LightropeLamp">Sofias ljusslinga</option>
+			<option value="FanDevice">Fläkten</option>
+		</select>
+
+		<label for="AP-command" class="select">Kommando:</label>
+		<select name="AP-command" id="AP-command">
+			<option value="on">På</option>
+			<option value="off">Av</option>
+		</select>
+		
+		<label for="AP-date" class="select">Datum:</label>
+		<input type="text" name="AP-date" id="AP-date" placeholder="YYYY-MM-DD"></input>
+		
+		<label for="AP-time" class="select">Tid:</label>
+		<input type="text" name="AP-time" id="AP-time" placeholder="HH:MM"></input>
+
+		<br />
+				
+		<a href="#" data-role="button" id="addPlannedCommand">Genomför</a>	
+	</div><!-- /content -->
+	
+</div><!-- /page "advancedControls"-->
+
 <div data-role="page" id="menu">
 	<div data-role="content">
 	
@@ -165,12 +199,12 @@
 		</div>
 		
 		<div class="ui-grid-a doublebutton fourbuttonsTop">
-				<div class="ui-block-a"><a href="#advancedControls"       data-transition="slidedown" data-direction="reverse" class="buttonLeft" data-role="button">Avancerad <br /> Kontroll</a></div>
-				<div class="ui-block-b"><a href="#" data-transition="slidedown" data-direction="reverse" class="buttonRight" data-role="button">Om <br /> sidan</a></div>
+				<div class="ui-block-a"><a href="#advancedControls"	data-transition="slidedown" data-direction="reverse" class="buttonLeft" data-role="button">Avancerad <br /> Kontroll</a></div>
+				<div class="ui-block-b"><a href="#about" 			data-transition="slidedown" data-direction="reverse" class="buttonRight" data-role="button">Om <br /> sidan</a></div>
 		</div>
 		<div class="ui-grid-a doublebutton fourbuttonsBot">
-				<div class="ui-block-a"><a href="#" data-transition="slidedown" data-direction="reverse" class="buttonLeft" data-role="button">Planerade <br /> händelser</a></div>
-				<div class="ui-block-b"><a href="#" data-transition="slidedown" data-direction="reverse" class="buttonRight" data-role="button">Lägg till  <br /> händelser</a></div>
+				<div class="ui-block-a"><a href="#" 				data-transition="slidedown"	data-direction="reverse" class="buttonLeft" data-role="button">Planerade <br /> händelser</a></div>
+				<div class="ui-block-b"><a href="#addPlannedAction" data-transition="slidedown" data-direction="reverse" class="buttonRight" data-role="button">Lägg till  <br /> händelser</a></div>
 		</div>
 
 		<p class="description">Made by Gabriel Ingemarsson</p>
