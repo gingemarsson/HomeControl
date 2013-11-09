@@ -28,7 +28,7 @@ $('#doAdvancedCommand').click(function () {
 $('#addPlannedCommand').click(function () {
 	var timedate = new Date($("#AP-date").val() + " " + $("#AP-time").val())
 	
-	if (timedate == "Invalid Date") {alert("Invalid Date");}
+	if (timedate == "Invalid Date") {alert("Invalid Date"); return}
 	
 	var actions = '[{"command":"' + $("#AP-command").val() + '","id":"' + $("#AP-id").val() + '", "timedate": "' + timedate.getTime() + '"}]';
 	var ajax = $.ajax("/cmd?cmd=" + actions)
