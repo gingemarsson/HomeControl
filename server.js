@@ -9,8 +9,6 @@ var database = new Database("127.0.0.1", 5984);
 // WEBSERVER
 //------------------------
 
-console.log("Application listening");
-
 //FILES
 app.use("/index.html", function(req, res, next) {res.sendfile(__dirname + "/www/index.html");});
 app.use("/script.js", function(req, res, next) {res.sendfile(__dirname + "/www/script.js");});
@@ -30,6 +28,19 @@ app.use("/cmd" ,function(req, res, next){
 	res.send("Commands:" + req.query.cmd);
 });
 
+//GET PLANNED ACTIONS
+app.use("/plannedActions" ,function(req, res, next){
+	database.GetPlannedActions(function(data) {
+		res.send(data)
+	});
+});
+
+//REMOVE PLANNED ACTIONS
+app.use("/removePlannedAction" ,function(req, res, next){
+	database.RemoveFromDB(req.query.id, req.query.rev)
+	res.send("Removing from DB")
+});
+
 //MANUALLY TRIGGER DATABSE CHECK
 app.use("/DB-check" ,function(req, res, next){
 	database.CheckDB();
@@ -45,6 +56,7 @@ app.use("/", function(req, res, next) {
 
 //Bind webbserver to port 80
 app.listen(80); 
+console.log("[INFO]: Application listening at port 80");
 
 //Check database every 10 sec
 setInterval( function(){database.CheckDB()}, 10000);
@@ -93,14 +105,16 @@ function Database (hostname, port) {
 	
 	//Functions
 	this.CheckDB = function() {
-		this.options.path = "/actions/_design/homecontrol/_view/byDate";
-		this.options.method = "GET";
+		var options = this.options;
+		
+		options.path = "/actions/_design/homecontrol/_view/byDate";
+		options.method = "GET";
 
 		var self = this;
 		data = "";
 		
 		console.log("[INFO]: Database check initiated");
-		req = http.request(this.options, function(res) {
+		req = http.request(options, function(res) {
 			res.setEncoding("utf8");
 			
 			res.on("data", function (chunk) {
@@ -123,10 +137,12 @@ function Database (hostname, port) {
 	}
 	
 	this.RemoveFromDB = function(DatabaseId, rev) {
-		this.options.path = "/actions/" + DatabaseId + "?rev=" + rev;
-		this.options.method = "DELETE";
+		var options = this.options;
 		
-		req = http.request(this.options, function(res) {
+		options.path = "/actions/" + DatabaseId + "?rev=" + rev;
+		options.method = "DELETE";
+		
+		req = http.request(options, function(res) {
 			res.setEncoding("utf8");
 			
 			res.on('end', function () {
@@ -137,17 +153,43 @@ function Database (hostname, port) {
 	}
 	
 	this.AddToDB = function(action){
-		this.options.path = "/actions";
-		this.options.method = "POST";
-		this.options.headers = {'Content-Type': 'application/json'}
+		var options = this.options;
 		
-		var req = http.request(this.options, function(res) {
+		options.path = "/actions";
+		options.method = "POST";
+		options.headers = {'Content-Type': 'application/json'}
+		
+		var req = http.request(options, function(res) {
 			res.setEncoding('utf8');
 			res.on('data', function (chunk) {
 				console.log("[DB] CMD added to DB:" + chunk);
 			});
 		});
 		req.write(JSON.stringify(action));
+		req.end()
+	}
+	
+	this.GetPlannedActions = function(callback) {
+		var options = this.options;
+		
+		options.path = "/actions/_design/homecontrol/_view/byDate";
+		options.method = "GET";
+				
+		var data = "";
+		
+		console.log("[INFO]: Gathering data from database");
+		req = http.request(options, function(res) {
+			res.setEncoding("utf8");
+			
+			res.on("data", function (chunk) {
+				data += chunk;
+			});
+			
+			res.on('end', function () {	
+				data = JSON.stringify(JSON.parse(data).rows)
+				callback(data);
+			});
+		});
 		req.end()
 	}
 }

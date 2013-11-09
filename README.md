@@ -19,7 +19,7 @@ Planned features:
 - Delayed commands *(2013-10-07)*
 - Planned commands *(2013-10-20)*
 - UI for planning "Planned commands" *(2013-11-08)*
-- UI to view and remove "Planned commands"
+- UI to view and remove "Planned commands" *(2013-11-09)*
 - Website made for computers/bigger screens
 - Editing of "Planned commands"
 - Editing of Tellstick Units on the website (Admin interface)

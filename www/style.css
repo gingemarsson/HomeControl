@@ -36,6 +36,22 @@ ul[data-role="listview"] li  a {padding: 15px !important; }
 
 input[type="text"] {font-size: 1.3em;}
 
+.rmPlanned {
+	font-size: 3.5em;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.rmPlanned a {
+	color: #777;
+	text-decoration: none;
+}
+
+.rmPlanned a:hover {
+	color: #222;
+}
+
 /*For menu icon*/
 .box-shadow-menu {
   position: relative;

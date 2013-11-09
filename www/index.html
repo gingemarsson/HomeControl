@@ -74,7 +74,7 @@
 		<a href="#" data-cmd='[{"command":"on","id":"FanDevice"},{"command":"off","id":"FanDevice", "delay": "15"}]' data-role="button">Fläkt i 15 sec</a>
 		<a href="#" data-cmd='[{"command":"on","id":"ScreenLamp", "delay": "1"},{"command":"off","id":"ScreenLamp", "delay": "1.2"},{"command":"on","id":"ScreenLamp", "delay": "1.4"},{"command":"off","id":"ScreenLamp", "delay": "1.6"},{"command":"on","id":"ScreenLamp", "delay": "1.8"},{"command":"off","id":"ScreenLamp", "delay": "2"}]' data-role="button">Crazy skärmbelysning</a>
 
-		<p  class="description" id="tellstickResult">Resultat: n/a</p>
+		<p  class="description status">Resultat: n/a</p>
 	
 	</div><!-- /content -->
 </div><!-- /page "simpleControls" -->
@@ -94,7 +94,7 @@
 			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"LightropeLamp"}]' class="buttonRight" data-role="button">Av</a></div>
 		</div>
 
-		<p  class="description" id="tellstickResult">Resultat: n/a</p>
+		<p  class="description status">Resultat: n/a</p>
 	
 	</div><!-- /content -->
 </div><!-- /page "sofia" -->
@@ -182,10 +182,54 @@
 
 		<br />
 				
-		<a href="#" data-role="button" id="addPlannedCommand">Genomför</a>	
+		<a href="#" data-role="button" id="addPlannedCommand">Lägg till</a>
+		
+		<p  class="description status">Resultat: n/a</p>
 	</div><!-- /content -->
 	
-</div><!-- /page "advancedControls"-->
+</div><!-- /page "addPlannecCommands"-->
+
+<div data-role="page" id="plannedActions">
+
+	<div data-role="header" data-position="fixed" data-id="mainheader">
+		<a href="#menu" data-transition="slidedown" data-rel="dialog" class="box-shadow-menu">&nbsp;</a>
+		<h1>Home Control.</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+	
+		<h1>Planerade händelser:</h1>
+		<a href="#" data-role="button" id="refreshPlannedCommands">Uppdatera lista</a>
+		
+		<ul data-role="listview" data-inset="true" id="plannedActionsList">
+			
+		</ul>
+		
+	</div><!-- /content -->
+	
+</div><!-- /page "plannedActions"-->
+
+<div data-role="page" id="about">
+
+	<div data-role="header" data-position="fixed" data-id="mainheader">
+		<a href="#menu" data-transition="slidedown" data-rel="dialog" class="box-shadow-menu">&nbsp;</a>
+		<h1>Home Control.</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+	
+		<h1>Om:</h1>
+		<p>
+			En enkel hemsida för att styra lampor i hemmet med hjälp av mobilen eller datorn. <i>Copyright 2013 Gabriel Ingemarsson</i>.
+		</p>
+
+		
+		<h1>Status:</h1>
+		<p  class="description status">Resultat: n/a</p>
+		
+	</div><!-- /content -->
+	
+</div><!-- /page "about"-->
 
 <div data-role="page" id="menu">
 	<div data-role="content">
@@ -203,7 +247,7 @@
 				<div class="ui-block-b"><a href="#about" 			data-transition="slidedown" data-direction="reverse" class="buttonRight" data-role="button">Om <br /> sidan</a></div>
 		</div>
 		<div class="ui-grid-a doublebutton fourbuttonsBot">
-				<div class="ui-block-a"><a href="#" 				data-transition="slidedown"	data-direction="reverse" class="buttonLeft" data-role="button">Planerade <br /> händelser</a></div>
+				<div class="ui-block-a"><a href="#plannedActions"	data-transition="slidedown"	data-direction="reverse" class="buttonLeft" data-role="button">Planerade <br /> händelser</a></div>
 				<div class="ui-block-b"><a href="#addPlannedAction" data-transition="slidedown" data-direction="reverse" class="buttonRight" data-role="button">Lägg till  <br /> händelser</a></div>
 		</div>
 
