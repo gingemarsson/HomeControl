@@ -1,8 +1,6 @@
-//Insert current time into add planned action
-date = new Date();
-$("#AP-time").val( date.getHours() + ":" + date.getMinutes());
-$("#AP-date").val( date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2));
-
+//------------------------
+// BUTTONS EVENTS
+//------------------------
 
 //Button triggers
 $('a[data-cmd]').click(function () {
@@ -12,7 +10,7 @@ $('a[data-cmd]').click(function () {
 	ajax.done(function(response) {$(".status").html("Kommando skickat: " + response);})
 	ajax.fail(function() {$(".status").html('FEL: Anslutningen kunde inte upprättas.');})
 	
-	console.log("[CMD Sent]: " + actions);
+	console.log("[CMD]: " + actions);
  });
  
 $('#doAdvancedCommand').click(function () {
@@ -22,7 +20,7 @@ $('#doAdvancedCommand').click(function () {
 	ajax.done(function(response) {$(".status").html("Kommando skickat: " + response);})
 	ajax.fail(function() {$(".status").html('FEL: Anslutningen kunde inte upprättas.');})
 
-	console.log("[CMD Sent]: " + actions);
+	console.log("[CMD]: " + actions);
 });
 
 $('#addPlannedCommand').click(function () {
@@ -36,19 +34,30 @@ $('#addPlannedCommand').click(function () {
 	ajax.done(function(response) {$(".status").html("Kommando skickat: " + response);})
 	ajax.fail(function() {$(".status").html('FEL: Anslutningen kunde inte upprättas.');})
 
-	console.log("[CMD Sent]: " + actions);
+	console.log("[CMD]: " + actions);
 });
 
 $('#refreshPlannedCommands').click(function () {
 	updatePlannedList();
 });
 
+//------------------------
+// PAGE LOAD EVENTS
+//------------------------
+
+//Insert current time into add planned action
+$('#addPlannedAction').on('pageshow', function() {
+	date = new Date();
+	$("#AP-time").val( ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2));
+	$("#AP-date").val( date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2));
+});
  
 //Update list of planned actions
-$('#plannedActions').live('pageload', updatePlannedList());
+$('#plannedActions').on('pageshow', function() {updatePlannedList();});
 
 function updatePlannedList() {
 	var ajax = $.ajax("/plannedActions")
+	console.log("[INFO]: Updating list");
 	
 	ajax.done(function(response) {
 		var listHTML = "";
@@ -63,6 +72,8 @@ function updatePlannedList() {
 			listHTML += "<div class='rmPlanned'><a href='#' data-role='none' data-databaseId=" + action.id + " data-databaseRev=" + action.value.rev + ">&#215;</a></div></li>";
 			listHTML += "</li>";
 		});
+		
+		console.log("[INFO]: List updated");
 		
 		$("#plannedActionsList").html(listHTML);
 		$('#plannedActionsList').listview('refresh');
