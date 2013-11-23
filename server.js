@@ -72,13 +72,21 @@ function Action (command, id, delay, timedate) {
 	this.id = String(id).replace(/[^0-9|a-z|A-Z]/g,"");
 	this.delay = String(delay).replace(/[^0-9]/g,"");
 	this.timedate = String(timedate).replace(/[^0-9]/g,"");
-	
+		
+	//If timedate is a day lower than todays date, add it to 00:00 today (this allows for smarter macros)
+	if (this.timedate < Date.now() && this.timedate != "") {
+		midnightToday = new Date(new Date(Date.now()).getFullYear(), new Date(Date.now()).getMonth(), new Date(Date.now()).getDate()).getTime(); //The value of 00:00 today
+		
+		if (parseInt(this.timedate) + midnightToday < Date.now()) {this.timedate = parseInt(this.timedate) + midnightToday + 86400000;} //If if has already passed, shift it forward a day
+		else {this.timedate = parseInt(this.timedate) + midnightToday;}
+	}
+		
 	//Delay defaults to 0
 	if (delay == undefined) {this.delay = 0;}
 	
 	//Functions
 	this.execute = function(addToDB) {
-		if (parseInt(timedate) < Date.now() || timedate == undefined) {
+		if (this.timedate < Date.now() || this.timedate == "") {
 			setTimeout(function(){
 				console.log("[CMD] tdtool --" + command + " " + id); //Log command
 				exec("tdtool --" + command + " " + id); //Execute command
@@ -104,7 +112,7 @@ function Database (hostname, port) {
 		};
 	
 	//Functions
-	this.CheckDB = function() {
+	this.CheckDB = function() { //Check if commands should be executed now
 		var options = this.options;
 		
 		options.path = "/actions/_design/homecontrol/_view/byDate";
@@ -136,7 +144,7 @@ function Database (hostname, port) {
 		console.log("[INFO]: Database check done");
 	}
 	
-	this.RemoveFromDB = function(DatabaseId, rev) {
+	this.RemoveFromDB = function(DatabaseId, rev) { //Remove command with the databaseID and rev from the DB
 		var options = this.options;
 		
 		options.path = "/actions/" + DatabaseId + "?rev=" + rev;
@@ -152,7 +160,7 @@ function Database (hostname, port) {
 		req.end()
 	}
 	
-	this.AddToDB = function(action){
+	this.AddToDB = function(action){ //Add an action to the DB
 		var options = this.options;
 		
 		options.path = "/actions";
@@ -169,7 +177,7 @@ function Database (hostname, port) {
 		req.end()
 	}
 	
-	this.GetPlannedActions = function(callback) {
+	this.GetPlannedActions = function(callback) { //Execute function callback with the data as argument
 		var options = this.options;
 		
 		options.path = "/actions/_design/homecontrol/_view/byDate";
