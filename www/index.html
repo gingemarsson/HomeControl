@@ -20,7 +20,7 @@
 
 
 
-<div data-role="page" id="simpleControls">
+<div data-role="page" id="gabriel">
 	<div data-role="header" data-position="fixed" data-id="mainheader">
 		<a href="#menu" data-transition="slidedown" data-rel="dialog" class="box-shadow-menu">&nbsp;</a>
 		<h1>Home Control.</h1>
@@ -45,13 +45,62 @@
 			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"BedLamp"}]' class="buttonRight" data-role="button">Av</a></div>
 		</div>
 		
-		<a href="#" data-cmd='[{"command":"off","id":"ScreenLamp"},{"command":"off","id":"BedLamp"},{"command":"off","id":"DesktopLamp"}]' data-role="button">Stäng av allt</a>
+		<a href="#" data-cmd='[{"command":"off","id":"ScreenLamp"},{"command":"off","id":"BedLamp"},{"command":"off","id":"DesktopLamp"},{"command":"off","id":"ChristmasLamp"}]' data-role="button">Stäng av allt</a>
 		
 		<h1>Övrigt</h1>
+		<p class="label">Julbelysning</p>                         
+		<div class="ui-grid-a doublebutton">                   
+			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"ChristmasLamp"}]' class="buttonLeft" data-role="button">På</a></div>
+			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"ChristmasLamp"}]' class="buttonRight" data-role="button">Av</a></div>
+		</div>
 		<p class="label">Fläkt</p>
 		<div class="ui-grid-a doublebutton">
 			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"FanDevice"}]' class="buttonLeft" data-role="button">På</a></div>
 			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"FanDevice"}]' class="buttonRight" data-role="button">Av</a></div>
+		</div>
+		
+		<h1>Starta alla lampor:</h1>
+		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"28500000"},{"command":"on","id":"ScreenLamp","timedate":"28500000"},{"command":"on","id":"DesktopLamp","timedate":"28500000"}]' data-role="button" data-inline="true">07:55</a>
+		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"27600000"},{"command":"on","id":"ScreenLamp","timedate":"27600000"},{"command":"on","id":"DesktopLamp","timedate":"27600000"}]' data-role="button" data-inline="true">07:40</a>
+		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"25200000"},{"command":"on","id":"ScreenLamp","timedate":"25200000"},{"command":"on","id":"DesktopLamp","timedate":"25200000"}]' data-role="button" data-inline="true">07:00</a>
+		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"23400000"},{"command":"on","id":"ScreenLamp","timedate":"23400000"},{"command":"on","id":"DesktopLamp","timedate":"23400000"}]' data-role="button" data-inline="true">06:30</a>
+		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"22800000"},{"command":"on","id":"ScreenLamp","timedate":"22800000"},{"command":"on","id":"DesktopLamp","timedate":"22800000"}]' data-role="button" data-inline="true">06:20</a>
+
+		<h1>Macros</h1>
+		<a href="#" data-cmd='[{"command":"on","id":"BedLamp"},{"command":"off","id":"ScreenLamp"},{"command":"off","id":"DesktopLamp"},{"command":"off","id":"ChristmasLamp"},{"command":"off","id":"FanDevice"}]' data-role="button">Bedtime</a>
+		<p  class="description status">Resultat: n/a</p>
+	
+	</div><!-- /content -->
+</div><!-- /page "gabriel" -->
+
+<div data-role="page" id="allControls">
+	<div data-role="header" data-position="fixed" data-id="mainheader">
+		<a href="#menu" data-transition="slidedown" data-rel="dialog" class="box-shadow-menu">&nbsp;</a>
+		<h1>Home Control.</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+	
+		<h1>Lampor</h1>
+		<p class="label">Skärmbelysning</p>
+		<div class="ui-grid-a doublebutton">
+			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"ScreenLamp"}]' class="buttonLeft" data-role="button">På</a></div>
+			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"ScreenLamp"}]' class="buttonRight" data-role="button">Av</a></div>
+		</div>
+		<p class="label">Skrivbordsbelysning</p>               
+		<div class="ui-grid-a doublebutton">                   
+			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"DesktopLamp"}]' class="buttonLeft" data-role="button">På</a></div>
+			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"DesktopLamp"}]' class="buttonRight" data-role="button">Av</a></div>
+		</div>
+		<p class="label">Sänglampa</p>                         
+		<div class="ui-grid-a doublebutton">                   
+			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"BedLamp"}]' class="buttonLeft" data-role="button">På</a></div>
+			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"BedLamp"}]' class="buttonRight" data-role="button">Av</a></div>
+		</div>
+		<p class="label">Julbelysbning</p>                         
+		<div class="ui-grid-a doublebutton">                   
+			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"ChristmasLamp"}]' class="buttonLeft" data-role="button">På</a></div>
+			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"ChristmasLamp"}]' class="buttonRight" data-role="button">Av</a></div>
 		</div>
 		<p class="label">Halllampa</p>
 		<div class="ui-grid-a doublebutton">
@@ -64,21 +113,21 @@
 			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"LightropeLamp"}]' class="buttonRight" data-role="button">Av</a></div>
 		</div>
 		
-		<h1>Starta alla lampor:</h1>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"28500000"},{"command":"on","id":"ScreenLamp","timedate":"28500000"},{"command":"on","id":"DesktopLamp","timedate":"28500000"}]' data-role="button" data-inline="true">07:55</a>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"27600000"},{"command":"on","id":"ScreenLamp","timedate":"27600000"},{"command":"on","id":"DesktopLamp","timedate":"27600000"}]' data-role="button" data-inline="true">07:40</a>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"25200000"},{"command":"on","id":"ScreenLamp","timedate":"25200000"},{"command":"on","id":"DesktopLamp","timedate":"25200000"}]' data-role="button" data-inline="true">07:00</a>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"23400000"},{"command":"on","id":"ScreenLamp","timedate":"23400000"},{"command":"on","id":"DesktopLamp","timedate":"23400000"}]' data-role="button" data-inline="true">06:30</a>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"22800000"},{"command":"on","id":"ScreenLamp","timedate":"22800000"},{"command":"on","id":"DesktopLamp","timedate":"22800000"}]' data-role="button" data-inline="true">06:20</a>
-
+		<h1>Övrigt</h1>
+		<p class="label">Fläkt</p>
+		<div class="ui-grid-a doublebutton">
+			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"FanDevice"}]' class="buttonLeft" data-role="button">På</a></div>
+			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"FanDevice"}]' class="buttonRight" data-role="button">Av</a></div>
+		</div>
+		
 		<h1>Macros</h1>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp"},{"command":"off","id":"ScreenLamp"},{"command":"off","id":"DesktopLamp"},{"command":"off","id":"FanDevice"}]' data-role="button">Bedtime</a>
+		<a href="#" data-cmd='[{"command":"on","id":"BedLamp"},{"command":"off","id":"ScreenLamp"},{"command":"off","id":"DesktopLamp"},{"command":"off","id":"ChristmasLamp"},{"command":"off","id":"FanDevice"}]' data-role="button">Bedtime</a>
 		<a href="#" data-cmd='[{"command":"on","id":"FanDevice"},{"command":"off","id":"FanDevice", "delay": "15"}]' data-role="button">Fläkt i 15 sec</a>
 
 		<p  class="description status">Resultat: n/a</p>
 	
 	</div><!-- /content -->
-</div><!-- /page "simpleControls" -->
+</div><!-- /page "allControls" -->
 
 <div data-role="page" id="sofia">
 
@@ -245,8 +294,9 @@
 		<h1 class="header">Home Control.</h1>
 		
 		<div data-role="controlgroup">
-			<a href="#simpleControls" data-role="button">Alla kontroller</a>
+			<a href="#gabriel" data-role="button">Alla kontroller</a>
 			<a href="#sofia" data-role="button">Sofias kontroller</a>
+			<a href="#allControls" data-role="button">Alla kontroller</a>
 		</div>
 		
 		<div class="ui-grid-a doublebutton fourbuttonsTop">
