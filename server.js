@@ -74,7 +74,7 @@ function Action (command, id, delay, timedate) {
 	this.timedate = String(timedate).replace(/[^0-9]/g,"");
 		
 	//If timedate is a day lower than todays date, add it to 00:00 today (this allows for smarter macros)
-	if (this.timedate + 86400000 < Date.now() && this.timedate != "") {
+	if (parseInt(this.timedate) + 86400000 < Date.now() && this.timedate != "") {
 		midnightToday = new Date(new Date(Date.now()).getFullYear(), new Date(Date.now()).getMonth(), new Date(Date.now()).getDate()).getTime(); //The value of 00:00 today
 		
 		if (parseInt(this.timedate) + midnightToday < Date.now()) {this.timedate = parseInt(this.timedate) + midnightToday + 86400000;} //If if has already passed, shift it forward a day
