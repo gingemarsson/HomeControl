@@ -86,7 +86,12 @@ function Action (command, id, delay, timedate) {
 	
 	//Functions
 	this.execute = function(addToDB) {
-		if (this.timedate < Date.now() || this.timedate == "") {
+		if (this.timedate == "") {
+			console.log("[CMD] tdtool --" + command + " " + id); //Log command
+			exec("tdtool --" + command + " " + id); //Execute command
+			return true;
+		}
+		else if (this.timedate < Date.now()) {
 			setTimeout(function(){
 				console.log("[CMD] tdtool --" + command + " " + id); //Log command
 				exec("tdtool --" + command + " " + id); //Execute command
