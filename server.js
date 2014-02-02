@@ -140,7 +140,7 @@ function Database (hostname, port) {
 					action = new Action(actionRaw.value.command, actionRaw.value.id, actionRaw.value.delay, actionRaw.value.timedate);
 					executed = action.execute(false);
 					if (executed) {
-						self.RemoveFromDB(actionRaw.id, actionRaw.value.rev);
+						self.RemoveFromDB(actionRaw.id, actionRaw.value._rev);
 					}
 				});
 			});
