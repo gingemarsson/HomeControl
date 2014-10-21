@@ -25,7 +25,7 @@ app.use("/cmd" ,function(req, res, next){
 		action.execute(true);
 	});
 	
-	res.send("Commands:" + req.query.cmd);
+	res.send("Commands:" + req.query.cmd + "<script>window.location = '/';</script>");
 });
 
 //GET PLANNED ACTIONS
