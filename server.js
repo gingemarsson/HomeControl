@@ -59,7 +59,7 @@ app.listen(80);
 console.log("[INFO]: Application listening at port 80");
 
 //Check database every 10 sec
-setInterval( function(){database.CheckDB()}, 10000);
+//setInterval( function(){database.CheckDB()}, 10000);
 
 //------------------------
 // ACTION CLASS
