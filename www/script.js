@@ -7,7 +7,7 @@ $('a[data-cmd]').click(function () {
 	var actions = $(this).attr("data-cmd");
 	var ajax = $.ajax("/cmd?cmd=" + actions)
 	
-	ajax.done(function(response) {$(".status").html("Kommando skickat: " + response);})
+	ajax.done(function(response) {$(".status").html("Kommando skickat: " + response.replace("<script>window.location = '/';</script>",""));})
 	ajax.fail(function() {$(".status").html('FEL: Anslutningen kunde inte upprättas.');})
 	
 	console.log("[CMD]: " + actions);
@@ -17,7 +17,7 @@ $('#doAdvancedCommand').click(function () {
 	var actions = '[{"command":"' + $("#AC-command").val() + '","id":"' + $("#AC-id").val() + '", "delay": "' + $("#AC-delay").val() + '"}]';
 	var ajax = $.ajax("/cmd?cmd=" + actions)
 
-	ajax.done(function(response) {$(".status").html("Kommando skickat: " + response);})
+	ajax.done(function(response) {$(".status").html("Kommando skickat: " + response.replace("<script>window.location = '/';</script>",""));})
 	ajax.fail(function() {$(".status").html('FEL: Anslutningen kunde inte upprättas.');})
 
 	console.log("[CMD]: " + actions);
@@ -31,7 +31,7 @@ $('#addPlannedCommand').click(function () {
 	var actions = '[{"command":"' + $("#AP-command").val() + '","id":"' + $("#AP-id").val() + '", "timedate": "' + timedate.getTime() + '"}]';
 	var ajax = $.ajax("/cmd?cmd=" + actions)
 
-	ajax.done(function(response) {$(".status").html("Kommando skickat: " + response);})
+	ajax.done(function(response) {$(".status").html("Kommando skickat: " + response.replace("<script>window.location = '/';</script>",""));})
 	ajax.fail(function() {$(".status").html('FEL: Anslutningen kunde inte upprättas.');})
 
 	console.log("[CMD]: " + actions);
