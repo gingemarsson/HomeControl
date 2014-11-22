@@ -37,7 +37,7 @@ app.use("/plannedActions" ,function(req, res, next){
 
 //REMOVE PLANNED ACTIONS
 app.use("/removePlannedAction" ,function(req, res, next){
-	database.RemoveFromDB(req.query.id, req.query.rev)
+	database.RemoveFromDB(req.query.id)
 	res.send("Removing from DB")
 });
 

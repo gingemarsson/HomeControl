@@ -63,13 +63,13 @@ function updatePlannedList() {
 		var listHTML = "";
 		
 		JSON.parse(response).forEach(function(action) {
-			var date = new Date(parseInt(action.value.timedate));
+			var date = new Date(parseInt(action.timedate));
 			var dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" +	("0" + date.getDate()).slice(-2) + " " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
 			
 			listHTML += "<li>";
 			listHTML += "<h1>" + dateString + "</h1>";
-			listHTML += "<p>" + action.value.id + " " + action.value.command + "</p>";
-			listHTML += "<div class='rmPlanned'><a href='#' data-role='none' data-databaseId=" + action.id + " data-databaseRev=" + action.value._rev + ">&#215;</a></div></li>";
+			listHTML += "<p>" + action.id + " " + action.command + "</p>";
+			listHTML += "<div class='rmPlanned'><a href='#' data-role='none' data-databaseId=" + action.id + " >&#215;</a></div></li>";
 			listHTML += "</li>";
 		});
 		
