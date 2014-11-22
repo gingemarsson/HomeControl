@@ -139,7 +139,7 @@ function Database (hostname, port) {
 		action.databaseId = this.nextDatabaseId();
 		data.push(action);
 		
-		console.log("[DB] CMD added to DB:" + chunk);
+		console.log("[DB] CMD added to DB:" + JSON.stringify(action));
 	}
 	
 	this.GetPlannedActions = function(callback) { //Execute function callback with the database data as argument
@@ -147,7 +147,7 @@ function Database (hostname, port) {
 	}
 	
 	this.nextDatabaseId = function(){ //Return next database id
-		if (data == undefined) {return 0;}
+		if (data[0] == undefined) {return 0;}
 		else {		
 			var nextDatabaseId = data[0].databaseId;
 			data.forEach(function(action, actionIndex){
