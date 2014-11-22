@@ -114,7 +114,7 @@ function Database (hostname, port) {
 	
 	//Functions
 	this.CheckDB = function() { //Check if commands should be executed now
-		console.log("[DB]: Database check initiated");
+		console.log("[DB] Database check initiated");
 		var self = this;
 		
 		var actionsToRemove = [];
@@ -130,7 +130,7 @@ function Database (hostname, port) {
 			self.RemoveFromDB(databaseId);
 		});
 		
-		console.log("[DB]: Database check done");
+		console.log("[DB] Database check done");
 		}
 	
 	this.RemoveFromDB = function(databaseIdToRemove) { //Remove command with the databaseId and rev from the DB
