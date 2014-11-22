@@ -47,7 +47,6 @@ app.use("/DB-check" ,function(req, res, next){
 	res.send("[INFO] Database checked");
 });
 
-
 //REDIRECT EVERYTHING ELSE TO "/"
 app.use("/", function(req, res, next) {
 	if (req.path.length > 1) {res.redirect("/");}
@@ -110,99 +109,52 @@ function Action (command, id, delay, timedate) {
 //------------------------
 
 function Database (hostname, port) {
-	
-	this.options = {
-		'hostname': hostname,
-		'port': port,
-		};
+
+	var data = [];
 	
 	//Functions
 	this.CheckDB = function() { //Check if commands should be executed now
-		var options = this.options;
-		
-		options.path = "/actions/_design/homecontrol/_view/byDate";
-		options.method = "GET";
-
-		var self = this;
-		data = "";
-		
 		console.log("[INFO]: Database check initiated");
-		req = http.request(options, function(res) {
-			res.setEncoding("utf8");
-			
-			res.on("data", function (chunk) {
-				data += chunk;
-			});
-			
-			res.on('end', function () {
-				actionsRaw = JSON.parse(data).rows;
-				actionsRaw.forEach(function(actionRaw) {
-					action = new Action(actionRaw.value.command, actionRaw.value.id, actionRaw.value.delay, actionRaw.value.timedate);
+		
+		data.forEach(function(action) {
 					executed = action.execute(false);
 					if (executed) {
-						self.RemoveFromDB(actionRaw.id, actionRaw.value._rev);
+						self.RemoveFromDB(action.databaseId);
 					}
 				});
 			});
-		});
-		req.end()
+
 		console.log("[INFO]: Database check done");
 	}
 	
-	this.RemoveFromDB = function(DatabaseId, rev) { //Remove command with the databaseID and rev from the DB
-		var options = this.options;
+	this.RemoveFromDB = function(databaseIdToRemove) { //Remove command with the databaseId and rev from the DB
+		var indexToRemove;
 		
-		options.path = "/actions/" + DatabaseId + "?rev=" + rev;
-		options.method = "DELETE";
-		
-		req = http.request(options, function(res) {
-			res.setEncoding("utf8");
-			
-			res.on('end', function () {
-				console.log("[DB]: CMD removed from DB");
-			});
+		data.forEach(function(action, actionIndex){
+			if (action.databaseId == databaseIdToRemove) {indexToRemove = actionIndex}
 		});
-		req.end()
+		
+		data.splice(indexToRemove, 1);
 	}
 	
 	this.AddToDB = function(action){ //Add an action to the DB
-		var options = this.options;
+		action.databaseId = this.nextDatabaseId();
+		data.push(action);
 		
-		options.path = "/actions";
-		options.method = "POST";
-		options.headers = {'Content-Type': 'application/json'}
-		
-		var req = http.request(options, function(res) {
-			res.setEncoding('utf8');
-			res.on('data', function (chunk) {
-				console.log("[DB] CMD added to DB:" + chunk);
-			});
-		});
-		req.write(JSON.stringify(action));
-		req.end()
+		console.log("[DB] CMD added to DB:" + chunk);
 	}
 	
-	this.GetPlannedActions = function(callback) { //Execute function callback with the data as argument
-		var options = this.options;
+	this.GetPlannedActions = function(callback) { //Execute function callback with the database data as argument
+		callback(JSON.stringify(data));
+	}
+	
+	this.nextDatabaseId = function(){ //Return next database id
+		if (data == undefined) {return 0;}
 		
-		options.path = "/actions/_design/homecontrol/_view/byDate";
-		options.method = "GET";
-				
-		var data = "";
-		
-		console.log("[INFO]: Gathering data from database");
-		req = http.request(options, function(res) {
-			res.setEncoding("utf8");
-			
-			res.on("data", function (chunk) {
-				data += chunk;
-			});
-			
-			res.on('end', function () {	
-				data = JSON.stringify(JSON.parse(data).rows)
-				callback(data);
-			});
+		var nextDatabaseId = data[0].databaseId;
+		data.forEach(function(action, actionIndex){
+			if (action.databaseId > nextDatabaseId){nextDatabaseId = action.databaseId;}
 		});
-		req.end()
+		return nextDatabaseId + 1;
 	}
 }
