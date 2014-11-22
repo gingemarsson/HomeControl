@@ -178,7 +178,7 @@ function Database (hostname, port) {
 	}
 	
 	this.readFile = function(){
-		fs.readFile('/data.txt','utf8', function(err, fileData){
+		fs.readFile('data.txt','utf8', function(err, fileData){
 			if (err) {
 				return console.log(err);
 			}
