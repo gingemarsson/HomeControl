@@ -117,12 +117,19 @@ function Database (hostname, port) {
 		console.log("[INFO]: Database check initiated");
 		var self = this;
 		
+		var actionsToRemove = [];
+		
 		data.forEach(function(action) {
 			executed = action.execute(false);
 			if (executed) {
-				self.RemoveFromDB(action.databaseId);
+				actionsToRemove.push(action.databaseId);
 			}
 		});
+		
+		actionsToRemove.forEach(function(databaseId){
+			self.RemoveFromDB(databaseId);
+		});
+		
 		console.log("[INFO]: Database check done");
 		}
 	
