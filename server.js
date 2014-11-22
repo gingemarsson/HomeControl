@@ -182,7 +182,16 @@ function Database (hostname, port) {
 			if (err) {
 				return console.log(err);
 			}
-			data = JSON.parse(fileData);
+			data = [];
+			
+			fileData = JSON.parse(fileData);
+			fileData.forEach(function(actionFromFile){
+				action = new Action(actionFromFile.command, actionFromFile.id, actionFromFile.delay, actionFromFile.timedate);
+				action.databaseId = actionFromFile.databaseId;
+				
+				data.push(action);
+			});
+			
 			console.log("[FS] File read");
 		})
 	}
