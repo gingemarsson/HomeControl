@@ -123,6 +123,7 @@ function Database (hostname, port) {
 		
 		if(dataChangedSinceLastUpdate){
 			this.WriteFile();
+			dataChangedSinceLastUpdate = false;
 		}
 	}
 	
