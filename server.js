@@ -141,7 +141,7 @@ function Database (hostname, port) {
 		});
 		
 		data.splice(indexToRemove, 1);
-		console.log("[DB] CMD removed from DB:" + indexToRemove);
+		console.log("[DB] CMD removed from DB:" + databaseIdToRemove);
 	}
 	
 	this.AddToDB = function(action){ //Add an action to the DB
