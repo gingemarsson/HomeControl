@@ -148,11 +148,12 @@ function Database (hostname, port) {
 	
 	this.nextDatabaseId = function(){ //Return next database id
 		if (data == undefined) {return 0;}
-		
-		var nextDatabaseId = data[0].databaseId;
-		data.forEach(function(action, actionIndex){
-			if (action.databaseId > nextDatabaseId){nextDatabaseId = action.databaseId;}
-		});
-		return nextDatabaseId + 1;
+		else {		
+			var nextDatabaseId = data[0].databaseId;
+			data.forEach(function(action, actionIndex){
+				if (action.databaseId > nextDatabaseId){nextDatabaseId = action.databaseId;}
+			});
+			return nextDatabaseId + 1;
+		}
 	}
 }
