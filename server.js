@@ -115,11 +115,15 @@ function Action (command, id, delay, timedate) {
 function Database (hostname, port) {
 
 	var data = [];
+	var dataChangedSinceLastUpdate = false;
 	
 	//Functions
 	this.Update = function(){
 		this.CheckDB();
-		this.WriteFile();
+		
+		if(dataChangedSinceLastUpdate){
+			this.WriteFile();
+		}
 	}
 	
 	this.CheckDB = function() { //Check if commands should be executed now
@@ -150,6 +154,8 @@ function Database (hostname, port) {
 		});
 		
 		data.splice(indexToRemove, 1);
+		
+		dataChangedSinceLastUpdate = true;
 		console.log("[DB] CMD removed from DB:" + databaseIdToRemove);
 	}
 	
@@ -157,6 +163,7 @@ function Database (hostname, port) {
 		action.databaseId = this.NextDatabaseId();
 		data.push(action);
 		
+		dataChangedSinceLastUpdate = true;
 		console.log("[DB] CMD added to DB:" + JSON.stringify(action));
 	}
 	
