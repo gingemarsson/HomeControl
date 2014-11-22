@@ -171,12 +171,12 @@ function Database (hostname, port) {
 		}
 	}
 	
-	this.writeFile(){
+	this.writeFile = function(){
 		fs.writeFile('data.txt', JSON.stringify(data), 'utf8')
 		console.log("[FS] File written");
 	}
 	
-	this.readFile(){
+	this.readFile = function(){
 		fs.readFile('/test.txt','utf8', function(err, fileData){
 			if (err) {
 				return console.log(err);
