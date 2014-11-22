@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var exec = require('child_process').exec;
 var http = require('http');
+var fs = require('fs');
 
 var database = new Database("127.0.0.1", 5984);
 
