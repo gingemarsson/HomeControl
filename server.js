@@ -62,7 +62,7 @@ console.log("[INFO]: Application listening at port 80");
 database.ReadFile();
 
 //Check database every 10 sec
-setInterval( function(){database.CheckDB()}, 10000);
+setInterval( function(){database.Update()}, 10000);
 
 //------------------------
 // ACTION CLASS
