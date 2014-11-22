@@ -57,6 +57,9 @@ app.use("/", function(req, res, next) {
 app.listen(80); 
 console.log("[INFO]: Application listening at port 80");
 
+//Read database from file
+database.readFile();
+
 //Check database every 10 sec
 setInterval( function(){database.CheckDB()}, 10000);
 
@@ -142,6 +145,7 @@ function Database (hostname, port) {
 		
 		data.splice(indexToRemove, 1);
 		console.log("[DB] CMD removed from DB:" + databaseIdToRemove);
+		this.writeFile();
 	}
 	
 	this.AddToDB = function(action){ //Add an action to the DB
@@ -149,6 +153,7 @@ function Database (hostname, port) {
 		data.push(action);
 		
 		console.log("[DB] CMD added to DB:" + JSON.stringify(action));
+		this.writeFile();
 	}
 	
 	this.GetPlannedActions = function(callback) { //Execute function callback with the database data as argument
@@ -164,5 +169,20 @@ function Database (hostname, port) {
 			});
 			return nextDatabaseId + 1;
 		}
+	}
+	
+	this.writeFile(){
+		fs.writeFile('data.txt', JSON.stringify(data), 'utf8')
+		console.log("[FS] File written");
+	}
+	
+	this.readFile(){
+		fs.readFile('/test.txt','utf8', function(err, fileData){
+			if (err) {
+				return console.log(err);
+			}
+			data = JSON.parse(fileData);
+			console.log("[FS] File read");
+		})
 	}
 }
