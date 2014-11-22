@@ -44,8 +44,8 @@ app.use("/removePlannedAction" ,function(req, res, next){
 
 //MANUALLY TRIGGER DATABSE CHECK
 app.use("/DB-check" ,function(req, res, next){
-	database.CheckDB();
-	res.send("[INFO] Database checked");
+	database.Update();
+	res.send("[INFO] Database updated");
 });
 
 //REDIRECT EVERYTHING ELSE TO "/"
@@ -59,7 +59,7 @@ app.listen(80);
 console.log("[INFO]: Application listening at port 80");
 
 //Read database from file
-database.readFile();
+database.ReadFile();
 
 //Check database every 10 sec
 setInterval( function(){database.CheckDB()}, 10000);
@@ -117,6 +117,11 @@ function Database (hostname, port) {
 	var data = [];
 	
 	//Functions
+	this.Update = function(){
+		this.CheckDB();
+		this.WriteFile();
+	}
+	
 	this.CheckDB = function() { //Check if commands should be executed now
 		console.log("[DB] Database check initiated");
 		var self = this;
@@ -146,22 +151,20 @@ function Database (hostname, port) {
 		
 		data.splice(indexToRemove, 1);
 		console.log("[DB] CMD removed from DB:" + databaseIdToRemove);
-		this.writeFile();
 	}
 	
 	this.AddToDB = function(action){ //Add an action to the DB
-		action.databaseId = this.nextDatabaseId();
+		action.databaseId = this.NextDatabaseId();
 		data.push(action);
 		
 		console.log("[DB] CMD added to DB:" + JSON.stringify(action));
-		this.writeFile();
 	}
 	
 	this.GetPlannedActions = function(callback) { //Execute function callback with the database data as argument
 		callback(JSON.stringify(data));
 	}
 	
-	this.nextDatabaseId = function(){ //Return next database id
+	this.NextDatabaseId = function(){ //Return next database id
 		if (data[0] == undefined) {return 0;}
 		else {		
 			var nextDatabaseId = data[0].databaseId;
@@ -172,12 +175,12 @@ function Database (hostname, port) {
 		}
 	}
 	
-	this.writeFile = function(){
+	this.WriteFile = function(){
 		fs.writeFile('data.txt', JSON.stringify(data), 'utf8')
 		console.log("[FS] File written");
 	}
 	
-	this.readFile = function(){
+	this.ReadFile = function(){
 		fs.readFile('data.txt','utf8', function(err, fileData){
 			if (err) {
 				return console.log(err);
