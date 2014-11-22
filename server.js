@@ -115,6 +115,7 @@ function Database (hostname, port) {
 	//Functions
 	this.CheckDB = function() { //Check if commands should be executed now
 		console.log("[INFO]: Database check initiated");
+		var self = this;
 		
 		data.forEach(function(action) {
 			executed = action.execute(false);
@@ -144,6 +145,7 @@ function Database (hostname, port) {
 	
 	this.GetPlannedActions = function(callback) { //Execute function callback with the database data as argument
 		callback(JSON.stringify(data));
+		console.log("[DB] Returned all actions:" + JSON.stringify(data));
 	}
 	
 	this.nextDatabaseId = function(){ //Return next database id
