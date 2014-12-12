@@ -6,189 +6,80 @@
 	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
 	
-	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
-	
-	
+	<script src="jquery-1.11.1.min.js"></script>
 	<link rel="stylesheet" href="style.css" />
 	<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
 </head> 
 <body> 
-
-
-
-
-<div data-role="page" id="gabriel">
-	<div data-role="header" data-position="fixed" data-id="mainheader">
-		<a href="#menu" data-transition="slidedown" data-rel="dialog" class="box-shadow-menu">&nbsp;</a>
+	<header>
 		<h1>Home Control.</h1>
-	</div><!-- /header -->
-
-	<div data-role="content">
+	</header>
+		<div data-role="content">
 	
+	<section>
 		<h1>Mina Lampor</h1>
-		<p class="label">Skärmbelysning</p>
-		<div class="ui-grid-a doublebutton">
-			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"ScreenLamp"}]' class="buttonLeft" data-role="button">På</a></div>
-			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"ScreenLamp"}]' class="buttonRight" data-role="button">Av</a></div>
-		</div>
-		<p class="label">Skrivbordsbelysning</p>               
-		<div class="ui-grid-a doublebutton">                   
-			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"DesktopLamp"}]' class="buttonLeft" data-role="button">På</a></div>
-			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"DesktopLamp"}]' class="buttonRight" data-role="button">Av</a></div>
-		</div>
-		<p class="label">Sänglampa</p>                         
-		<div class="ui-grid-a doublebutton">                   
-			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"BedLamp"}]' class="buttonLeft" data-role="button">På</a></div>
-			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"BedLamp"}]' class="buttonRight" data-role="button">Av</a></div>
-		</div>
-		
-		<a href="#" data-cmd='[{"command":"off","id":"ScreenLamp"},{"command":"off","id":"BedLamp"},{"command":"off","id":"DesktopLamp"}]' data-role="button">Stäng av allt</a>
-		
-		<h1>Övrigt</h1>
-
-		<p class="label">Sk&#228;rmar</p>                         
-		<div class="ui-grid-a doublebutton">                   
-			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"ChristmasLamp"}]' class="buttonLeft" data-role="button">På</a></div>
-			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"ChristmasLamp"}]' class="buttonRight" data-role="button">Av</a></div>
-		</div>
-		<p class="label">Fläkt</p>
-		<div class="ui-grid-a doublebutton">
-			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"FanDevice"}]' class="buttonLeft" data-role="button">På</a></div>
-			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"FanDevice"}]' class="buttonRight" data-role="button">Av</a></div>
-		</div>
-		
-		<h1>Starta alla lampor:</h1>
-<!--
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"21300000"},{"command":"on","id":"ScreenLamp","timedate":"21300000"},{"command":"on","id":"DesktopLamp","timedate":"21300000"}]' data-role="button" data-inline="true">07:55</a>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"20400000"},{"command":"on","id":"ScreenLamp","timedate":"20400000"},{"command":"on","id":"DesktopLamp","timedate":"20400000"}]' data-role="button" data-inline="true">07:40</a>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"18000000"},{"command":"on","id":"ScreenLamp","timedate":"18000000"},{"command":"on","id":"DesktopLamp","timedate":"18000000"}]' data-role="button" data-inline="true">07:00</a>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"16200000"},{"command":"on","id":"ScreenLamp","timedate":"16200000"},{"command":"on","id":"DesktopLamp","timedate":"16200000"}]' data-role="button" data-inline="true">06:30</a>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"15600000"},{"command":"on","id":"ScreenLamp","timedate":"15600000"},{"command":"on","id":"DesktopLamp","timedate":"15600000"}]' data-role="button" data-inline="true">06:20</a>
-
--->
-	        <a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"14400000"},{"command":"on","id":"ScreenLamp","timedate":"14400000"},{"command":"on","id":"DesktopLamp","timedate":"14400000"}]' data-role="button" data-inline="true">06:00</a>
-                <a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"15300000"},{"command":"on","id":"ScreenLamp","timedate":"15300000"},{"command":"on","id":"DesktopLamp","timedate":"15300000"}]' data-role="button" data-inline="true">06:15</a>
-                <a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"18000000"},{"command":"on","id":"ScreenLamp","timedate":"18000000"},{"command":"on","id":"DesktopLamp","timedate":"18000000"}]' data-role="button" data-inline="true">07:00</a>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"18900000"},{"command":"on","id":"ScreenLamp","timedate":"18900000"},{"command":"on","id":"DesktopLamp","timedate":"18900000"}]' data-role="button" data-inline="true">07:15</a>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"21600000"},{"command":"on","id":"ScreenLamp","timedate":"21600000"},{"command":"on","id":"DesktopLamp","timedate":"21600000"}]' data-role="button" data-inline="true">08:00</a>
-                <a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"22500000"},{"command":"on","id":"ScreenLamp","timedate":"22500000"},{"command":"on","id":"DesktopLamp","timedate":"22500000"}]' data-role="button" data-inline="true">08:15</a>
-
-
-
-
-
-		<h1>Macros</h1>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp"},{"command":"off","id":"ScreenLamp"},{"command":"off","id":"DesktopLamp"},{"command":"off","id":"ChristmasLamp"},{"command":"off","id":"FanDevice"}]' data-role="button">Bedtime</a>
-		<p  class="description status">Resultat: n/a</p>
-
-		<div style="margin: auto; max-width: 500px">
-			<div class="ui-grid-a doublebutton fourbuttonsTop">
-                                <div class="ui-block-a"><a href="#advancedControls"     data-transition="slidedown" data-direction="reverse" class="buttonLeft" data-role="button">Avancerad <br /> Kontroll</a></div>
-                                <div class="ui-block-b"><a href="#about"                        data-transition="slidedown" data-direction="reverse" class="buttonRight" data-role="button">Om <br /> sidan</a></div>
-        	        </div>
-                	<div class="ui-grid-a doublebutton fourbuttonsBot">
-                                <div class="ui-block-a"><a href="#plannedActions"       data-transition="slidedown"     data-direction="reverse" class="buttonLeft" data-role="button">Planerade <br /> händelser</a></div>
-                                <div class="ui-block-b"><a href="#addPlannedAction" data-transition="slidedown" data-direction="reverse" class="buttonRight" data-role="button">Lägg till  <br /> händelser</a></div>
+		<div class="buttonset">
+			<p class="label">Skärmbelysning</p>
+			<div class="doublebutton">
+				<a href="#" data-cmd='[{"command":"on","id":"ScreenLamp"}]' class="buttonLeft" data-role="button">På</a>
+				<a href="#" data-cmd='[{"command":"off","id":"ScreenLamp"}]' class="buttonRight" data-role="button">Av</a>
 			</div>
 		</div>
-	
-	</div><!-- /content -->
-</div><!-- /page "gabriel" -->
-
-<div data-role="page" id="allControls">
-	<div data-role="header" data-position="fixed" data-id="mainheader">
-		<a href="#menu" data-transition="slidedown" data-rel="dialog" class="box-shadow-menu">&nbsp;</a>
-		<h1>Home Control.</h1>
-	</div><!-- /header -->
-
-	<div data-role="content">
-	
-		<h1>Lampor</h1>
-		<p class="label">Skärmbelysning</p>
-		<div class="ui-grid-a doublebutton">
-			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"ScreenLamp"}]' class="buttonLeft" data-role="button">På</a></div>
-			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"ScreenLamp"}]' class="buttonRight" data-role="button">Av</a></div>
-		</div>
+		<div class="buttonset">
 		<p class="label">Skrivbordsbelysning</p>               
-		<div class="ui-grid-a doublebutton">                   
-			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"DesktopLamp"}]' class="buttonLeft" data-role="button">På</a></div>
-			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"DesktopLamp"}]' class="buttonRight" data-role="button">Av</a></div>
+			<div class="doublebutton">
+				<a href="#" data-cmd='[{"command":"on","id":"DesktopLamp"}]' class="buttonLeft" data-role="button">På</a>
+				<a href="#" data-cmd='[{"command":"off","id":"DesktopLamp"}]' class="buttonRight" data-role="button">Av</a>
+			</div>
 		</div>
-		<p class="label">Sänglampa</p>                         
-		<div class="ui-grid-a doublebutton">                   
-			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"BedLamp"}]' class="buttonLeft" data-role="button">På</a></div>
-			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"BedLamp"}]' class="buttonRight" data-role="button">Av</a></div>
-		</div>
-		<p class="label">Julbelysning</p>                         
-		<div class="ui-grid-a doublebutton">                   
-			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"ChristmasLamp"}]' class="buttonLeft" data-role="button">På</a></div>
-			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"ChristmasLamp"}]' class="buttonRight" data-role="button">Av</a></div>
-		</div>
-		<p class="label">Halllampa</p>
-		<div class="ui-grid-a doublebutton">
-			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"HallLamp"}]' class="buttonLeft" data-role="button">På</a></div>
-			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"HallLamp"}]' class="buttonRight" data-role="button">Av</a></div>
-		</div>
-		<p class="label">Sofias ljusslinga</p>
-		<div class="ui-grid-a doublebutton">
-			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"LightropeLamp"}]' class="buttonLeft" data-role="button">På</a></div>
-			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"LightropeLamp"}]' class="buttonRight" data-role="button">Av</a></div>
+		<div class="buttonset">
+		<p class="label">Sänglampa</p>
+			<div class="doublebutton">
+				<a href="#" data-cmd='[{"command":"on","id":"BedLamp"}]' class="buttonLeft" data-role="button">På</a>
+				<a href="#" data-cmd='[{"command":"off","id":"BedLamp"}]' class="buttonRight" data-role="button">Av</a>
+			</div>
 		</div>
 		
+		<div class="buttonset">
+			<a href="#" data-cmd='[{"command":"off","id":"ScreenLamp"},{"command":"off","id":"BedLamp"},{"command":"off","id":"DesktopLamp"}]' class="singleButton">Stäng av allt</a>
+		</div>
+	</section>
+	<section>
 		<h1>Övrigt</h1>
-		<p class="label">Fläkt</p>
-		<div class="ui-grid-a doublebutton">
-			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"FanDevice"}]' class="buttonLeft" data-role="button">På</a></div>
-			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"FanDevice"}]' class="buttonRight" data-role="button">Av</a></div>
+
+		<div class="buttonset">
+			<p class="label">Sk&#228;rmar</p>
+			<div class="doublebutton">
+				<a href="#" data-cmd='[{"command":"on","id":"ChristmasLamp"}]' class="buttonLeft" data-role="button">På</a>
+				<a href="#" data-cmd='[{"command":"off","id":"ChristmasLamp"}]' class="buttonRight" data-role="button">Av</a>
+			</div>
 		</div>
-		
+		<div class="buttonset">
+			<p class="label">Julbelysning</p>
+			<div class="doublebutton">
+				<a href="#" data-cmd='[{"command":"on","id":"FanDevice"}]' class="buttonLeft" data-role="button">På</a>
+				<a href="#" data-cmd='[{"command":"off","id":"FanDevice"}]' class="buttonRight" data-role="button">Av</a>
+			</div>
+		</div>
+	</section>
+	<section>
+		<h1>Starta alla lampor:</h1>
+
+	    <a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"14400000"},{"command":"on","id":"ScreenLamp","timedate":"14400000"},{"command":"on","id":"DesktopLamp","timedate":"14400000"}]' class="inlineButton">06:00</a>
+        <a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"15300000"},{"command":"on","id":"ScreenLamp","timedate":"15300000"},{"command":"on","id":"DesktopLamp","timedate":"15300000"}]' class="inlineButton">06:15</a>
+        <a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"18000000"},{"command":"on","id":"ScreenLamp","timedate":"18000000"},{"command":"on","id":"DesktopLamp","timedate":"18000000"}]' class="inlineButton">07:00</a>
+		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"18900000"},{"command":"on","id":"ScreenLamp","timedate":"18900000"},{"command":"on","id":"DesktopLamp","timedate":"18900000"}]' class="inlineButton">07:15</a>
+		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"21600000"},{"command":"on","id":"ScreenLamp","timedate":"21600000"},{"command":"on","id":"DesktopLamp","timedate":"21600000"}]' class="inlineButton">08:00</a>
+        <a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"22500000"},{"command":"on","id":"ScreenLamp","timedate":"22500000"},{"command":"on","id":"DesktopLamp","timedate":"22500000"}]' class="inlineButton">08:15</a>
+	</section>
+	<section>
 		<h1>Macros</h1>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp"},{"command":"off","id":"ScreenLamp"},{"command":"off","id":"DesktopLamp"},{"command":"off","id":"ChristmasLamp"},{"command":"off","id":"FanDevice"}]' data-role="button">Bedtime</a>
-		<a href="#" data-cmd='[{"command":"on","id":"FanDevice"},{"command":"off","id":"FanDevice", "delay": "15"}]' data-role="button">Fläkt i 15 sec</a>
-
-		<p  class="description status">Resultat: n/a</p>
-	
-	</div><!-- /content -->
-</div><!-- /page "allControls" -->
-
-<div data-role="page" id="sofia">
-
-	<div data-role="header" data-position="fixed" data-id="mainheader">
-		<a href="#menu" data-transition="slidedown" data-rel="dialog" class="box-shadow-menu">&nbsp;</a>
-		<h1>Home Control.</h1>
-	</div><!-- /header -->
-
-	<div data-role="content">
-		<h1>Sofias lampor</h1>
-		
-		<p class="label">Ljusslinga</p>
-		<div class="ui-grid-a doublebutton">
-			<div class="ui-block-a"><a href="#" data-cmd='[{"command":"on","id":"LightropeLamp"}]' class="buttonLeft" data-role="button">På</a></div>
-			<div class="ui-block-b"><a href="#" data-cmd='[{"command":"off","id":"LightropeLamp"}]' class="buttonRight" data-role="button">Av</a></div>
-		</div>
-		
-		<h1>Starta ljusslingan:</h1>
-		<a href="#" data-cmd='[{"command":"on","id":"LightropeLamp","timedate":"25200000"}]' data-role="button" data-inline="true">08:00</a>
-		<a href="#" data-cmd='[{"command":"on","id":"LightropeLamp","timedate":"20700000"}]' data-role="button" data-inline="true">06:45</a>	
-		<a href="#" data-cmd='[{"command":"on","id":"LightropeLamp","timedate":"19800000"}]' data-role="button" data-inline="true">06:30</a>
-
-		<p  class="description status">Resultat: n/a</p>
-	
-	</div><!-- /content -->
-</div><!-- /page "sofia" -->
-
-<div data-role="page" id="advancedControls">
-
-	<div data-role="header" data-position="fixed" data-id="mainheader">
-		<a href="#menu" data-transition="slidedown" data-rel="dialog" class="box-shadow-menu">&nbsp;</a>
-		<h1>Home Control.</h1>
-	</div><!-- /header -->
-
-	<div data-role="content">
-	
+		<a href="#" data-cmd='[{"command":"on","id":"BedLamp"},{"command":"off","id":"ScreenLamp"},{"command":"off","id":"DesktopLamp"},{"command":"off","id":"ChristmasLamp"},{"command":"off","id":"FanDevice"}]' class="inlineButton">Bedtime</a>
+		<a href="#" data-cmd='[{"command":"on","id":"FanDevice"},{"command":"off","id":"FanDevice", "delay": "15"}]' class="inlineButton">Fläkt i 15 sec</a>
+	</section>
+	<section>
 		<h1>Avancerad kontroll</h1>
 		
 		<label for="device" class="select">Enhet:</label>
@@ -196,8 +87,6 @@
 			<option value="ScreenLamp">Skärmlampa</option>
 			<option value="DesktopLamp">Skrivbordslampa</option>
 			<option value="BedLamp">Sänglampa</option>
-			<option value="HallLamp">Halllampa</option>
-			<option value="LightropeLamp">Sofias ljusslinga</option>
 			<option value="FanDevice">Fläkten</option>
 		</select>
 
@@ -223,20 +112,9 @@
 
 		<br />
 				
-		<a href="#" data-role="button" id="doAdvancedCommand">Genomför</a>	
-	</div><!-- /content -->
-	
-</div><!-- /page "advancedControls"-->
-
-<div data-role="page" id="addPlannedAction">
-
-	<div data-role="header" data-position="fixed" data-id="mainheader">
-		<a href="#menu" data-transition="slidedown" data-rel="dialog" class="box-shadow-menu">&nbsp;</a>
-		<h1>Home Control.</h1>
-	</div><!-- /header -->
-
-	<div data-role="content">
-	
+		<a href="#" class="inlineButton" id="doAdvancedCommand">Genomför</a>	
+	</section>
+	<section>
 		<h1>Lägg till planerad händelse:</h1>
 		
 		<label for="AP-device" class="select">Enhet:</label>
@@ -244,9 +122,7 @@
 			<option value="ScreenLamp">Skärmlampa</option>
 			<option value="DesktopLamp">Skrivbordslampa</option>
 			<option value="BedLamp">Sänglampa</option>
-			<option value="HallLamp">Halllampa</option>
-			<option value="LightropeLamp">Sofias ljusslinga</option>
-			<option value="FanDevice">Fläkten</option>
+			<option value="FanDevice">Julbelysning</option>
 		</select>
 
 		<label for="AP-command" class="select">Kommando:</label>
@@ -263,82 +139,28 @@
 
 		<br />
 				
-		<a href="#" data-role="button" id="addPlannedCommand">Lägg till</a>
-		
-		<p  class="description status">Resultat: n/a</p>
-	</div><!-- /content -->
-	
-</div><!-- /page "addPlannecCommands"-->
-
-<div data-role="page" id="plannedActions">
-
-	<div data-role="header" data-position="fixed" data-id="mainheader">
-		<a href="#menu" data-transition="slidedown" data-rel="dialog" class="box-shadow-menu">&nbsp;</a>
-		<h1>Home Control.</h1>
-	</div><!-- /header -->
-
-	<div data-role="content">
+		<a href="#" class="inlineButton" id="addPlannedCommand">Lägg till</a>
+	</section>
+	<section>
 	
 		<h1>Planerade händelser:</h1>
-		<a href="#" data-role="button" id="refreshPlannedCommands">Uppdatera lista</a>
+		<a href="#" class="inlineButton" id="refreshPlannedCommands">Uppdatera lista</a>
 		
 		<ul data-role="listview" data-inset="true" id="plannedActionsList">
+		
+		<li><h1>2014-12-14</h1><p>ScreenLamp on</p></li><li><h1>2014-12-14</h1><p>ScreenLamp on</p><div class="rmPlanned"><a href="#" data-role="none" data-databaseid="Screenlamp">×</a></div></li>
 			
 		</ul>
-		
-	</div><!-- /content -->
-	
-</div><!-- /page "plannedActions"-->
 
-<div data-role="page" id="about">
-
-	<div data-role="header" data-position="fixed" data-id="mainheader">
-		<a href="#menu" data-transition="slidedown" data-rel="dialog" class="box-shadow-menu">&nbsp;</a>
-		<h1>Home Control.</h1>
-	</div><!-- /header -->
-
-	<div data-role="content">
-	
-		<h1>Om:</h1>
-		<p>
-			En enkel hemsida för att styra lampor i hemmet med hjälp av mobilen eller datorn. <i>Copyright 2013 Gabriel Ingemarsson</i>.
-		</p>
-
-		
+	</section>
+	<section>
 		<h1>Status:</h1>
-		<p  class="description status">Resultat: n/a</p>
-		
-	</div><!-- /content -->
+		<p class="description status">Resultat: n/a</p>
+	</section>
 	
-</div><!-- /page "about"-->
-
-<div data-role="page" id="menu">
-	<div data-role="content">
 	
 		
-		<h1 class="header">Home Control.</h1>
-		
-		<div data-role="controlgroup">
-			<a href="#gabriel" data-role="button">Gabriels kontroller</a>
-			<a href="#sofia" data-role="button">Sofias kontroller</a>
-			<a href="#allControls" data-role="button">Alla kontroller</a>
-		</div>
-		
-		<div class="ui-grid-a doublebutton fourbuttonsTop">
-				<div class="ui-block-a"><a href="#advancedControls"	data-transition="slidedown" data-direction="reverse" class="buttonLeft" data-role="button">Avancerad <br /> Kontroll</a></div>
-				<div class="ui-block-b"><a href="#about" 			data-transition="slidedown" data-direction="reverse" class="buttonRight" data-role="button">Om <br /> sidan</a></div>
-		</div>
-		<div class="ui-grid-a doublebutton fourbuttonsBot">
-				<div class="ui-block-a"><a href="#plannedActions"	data-transition="slidedown"	data-direction="reverse" class="buttonLeft" data-role="button">Planerade <br /> händelser</a></div>
-				<div class="ui-block-b"><a href="#addPlannedAction" data-transition="slidedown" data-direction="reverse" class="buttonRight" data-role="button">Lägg till  <br /> händelser</a></div>
-		</div>
-
-		<p class="description">Made by Gabriel Ingemarsson</p>
-	
-	</div><!-- /content -->
-	
-</div><!-- /page "menu"-->
-
-<script src="script.js"></script>
+	</div>
+	<script src="script.js"></script>
 </body>
 </html>

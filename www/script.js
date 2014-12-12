@@ -72,11 +72,10 @@ function updatePlannedList() {
 			listHTML += "<div class='rmPlanned'><a href='#' data-role='none' data-databaseId=" + action.id + " >&#215;</a></div></li>";
 			listHTML += "</li>";
 		});
-		
+				
 		console.log("[INFO]: List updated");
 		
 		$("#plannedActionsList").html(listHTML);
-		$('#plannedActionsList').listview('refresh');
 		
 		$('a[data-databaseId]').click(function () {
 			var ajax = $.ajax("/removePlannedAction?id=" + $(this).attr("data-databaseId") + "&rev=" + $(this).attr("data-databaseRev"))
@@ -88,5 +87,5 @@ function updatePlannedList() {
 		 });
 	});
 	
-	ajax.fail(function() {alert("ERROR")})
+	ajax.fail(function() {$(".status").html('FEL: Anslutningen kunde inte upprättas.');})
 }
