@@ -12,6 +12,9 @@
 		width: 90%;
 		margin-top: 15px;
 	}
+	html .label {
+		margin-top: 20px;
+	}
 }
 
 @media all and (min-width: 1050px) {
