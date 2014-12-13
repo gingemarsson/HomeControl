@@ -8,14 +8,14 @@
 @media all and (max-width: 640px) {
 	div.buttonset {
 		display: block;
-		width: 90%;
+		margin: 10px;
 	}
 	.inlineButton {
 		display: block;
-		width: 90%;
+		
 	}
 	html hr {
-		width: 90%;
+		margin: 10px;
 		margin-top: 15px;
 	}
 	html .label {
@@ -32,7 +32,12 @@
 	html section .inlineButton {
 		padding-left: 0px;
 		padding-right: 0px;
-		min-width: 150px;
+		margin: 10px;
+		display: block;
+	}
+	
+	input[type="text"] {
+		margin: 10px;
 	}
 }
 
@@ -41,12 +46,20 @@
 		width: 590px;
 		margin: 10px auto;
 	}
+	
+	.buttonset {
+		width: 270px;
+	}
 }
 
 @media all and (min-width: 1050px) {
 	html section {
 		width: 880px;
 		margin: 10px auto;
+	}
+	
+	.buttonset {
+		width: 270px;
 	}
 }
 
@@ -78,7 +91,6 @@ section {
 }
 
 .buttonset {
-	width: 270px;
 	height: 68px;
 	display: inline-block;
 	margin: 10px
