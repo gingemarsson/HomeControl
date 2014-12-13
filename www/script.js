@@ -111,10 +111,10 @@ function showStatus(status) {
 }
 
 function sendCommand(command, message) {
-	//var ajax = $.ajax(command)
+	var ajax = $.ajax(command)
 			
-	//ajax.done(function(response) {showStatus(message + response);})
-	//ajax.fail(function() {showStatus('FEL: Anslutningen kunde inte upprättas.');})
+	ajax.done(function(response) {showStatus(message + response);})
+	ajax.fail(function() {showStatus('FEL: Anslutningen kunde inte upprättas.');})
 	
 	console.log("[CMD]: " + command);
 }
