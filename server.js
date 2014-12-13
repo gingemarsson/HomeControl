@@ -75,30 +75,23 @@ function Action (command, id, delay, timedate) {
 	this.id = String(id).replace(/[^0-9|a-z|A-Z]/g,"");
 	this.delay = String(delay).replace(/[^0-9]/g,"");
 	this.timedate = String(timedate).replace(/[^0-9]/g,"");
-		
-	//If timedate is a day lower than todays date, add it to 00:00 today (this allows for smarter macros)
-	if (parseInt(this.timedate) + 86400000 < Date.now() && this.timedate != "") {
-		midnightToday = new Date(new Date(Date.now()).getFullYear(), new Date(Date.now()).getMonth(), new Date(Date.now()).getDate()).getTime(); //The value of 00:00 today
-		
-		if (parseInt(this.timedate) + midnightToday < Date.now()) {this.timedate = parseInt(this.timedate) + midnightToday + 86400000;} //If if has already passed, shift it forward a day
-		else {this.timedate = parseInt(this.timedate) + midnightToday;}
-	}
-		
+			
 	//Delay defaults to 0
 	if (delay == undefined) {this.delay = 0;}
 	
 	//Functions
 	this.execute = function(addToDB) {
-		if (this.timedate == "") {
-			console.log("[CMD] tdtool --" + command + " " + id); //Log command
-			exec("tdtool --" + command + " " + id); //Execute command
-			return true;
-		}
-		else if (this.timedate < Date.now()) {
-			setTimeout(function(){
+		if (this.timedate == "" || this.timedate < Date.now()) {
+			if (delay == 0) {
 				console.log("[CMD] tdtool --" + command + " " + id); //Log command
 				exec("tdtool --" + command + " " + id); //Execute command
-			}, (delay * 1000)); //Times 1000 to make ms
+			}
+			else {
+				setTimeout(function(){
+					console.log("[CMD] tdtool --" + command + " " + id); //Log command
+					exec("tdtool --" + command + " " + id); //Execute command
+				}, (delay * 1000)); //Times 1000 to make ms
+			}
 			return true;
 		}
 		else if (addToDB){
