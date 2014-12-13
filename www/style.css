@@ -1,5 +1,11 @@
 /* Different screen sizes */
-@media all and (max-width: 600px) {
+@media all and (max-width: 380px){
+	html section {
+		margin: 5px auto;
+	}
+}
+
+@media all and (max-width: 640px) {
 	div.buttonset {
 		display: block;
 		width: 90%;
@@ -17,9 +23,16 @@
 	}
 }
 
+@media all and (min-width: 640px) and (max-width: 1050px){
+	html section {
+		width: 590px;
+		margin: 10px auto;
+	}
+}
+
 @media all and (min-width: 1050px) {
 	html section {
-		width: 960px;
+		width: 880px;
 		margin: 10px auto;
 	}
 }
