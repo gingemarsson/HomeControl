@@ -78,13 +78,14 @@ function updatePlannedList() {
 		
 		$("#plannedActionsList").html(listHTML);
 		
-		$('a[data-databaseId]').click(function () {
+		$('a[data-databaseId]').click(function (event) {
+			event.preventDefault();
 			var ajax = $.ajax("/removePlannedAction?id=" + $(this).attr("data-databaseId") + "&rev=" + $(this).attr("data-databaseRev"))
 			
 			ajax.done(function(response) {$(".status").html("Kommando borttaget: " + response);})
 			ajax.fail(function() {$(".status").html('FEL: Anslutningen kunde inte upprättas.');})
 			
-			
+			updatePlannedList();
 		 });
 	});
 	
