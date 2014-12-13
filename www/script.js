@@ -13,8 +13,6 @@ $('a[data-command]').click(function (event) {
 	console.log("TEST");
 	actions = JSON.parse($(this).attr("data-timeCommand"));
 	
-	
-	
 	actions.forEach(function(action){
 		timeString = action.timedate;
 		datetime = new Date(getDateString(new Date()) + " " + timeString);
@@ -26,8 +24,11 @@ $('a[data-command]').click(function (event) {
 		action.timedate = datetime.getTime();
 	});
 	
+	sendCommand("/cmd?cmd=" + JSON.stringify(actions), "Kommando skickat: ");
 	
-	sendCommand("/cmd?cmd=" + JSON.stringify(actions), "Kommando skickat: ")
+	//Update the list now and after 0.3 ms incase of a delay.
+	setTimeout(updatePlannedList(), 300);
+	updatePlannedList();
  });
  
 $('#doAdvancedCommand').click(function (event) {
