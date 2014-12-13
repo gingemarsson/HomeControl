@@ -8,6 +8,10 @@
 		display: block;
 		width: 90%;
 	}
+	html hr {
+		width: 90%;
+		margin-top: 15px;
+	}
 }
 
 @media all and (min-width: 1050px) {
@@ -46,7 +50,7 @@ section {
 
 .buttonset {
 	width: 270px;
-	height: 66px;
+	height: 68px;
 	display: inline-block;
 	margin: 10px
 }
@@ -59,7 +63,7 @@ section {
 }
 
 .label {
-	margin: 5px; 
+	margin: 0 0 10px 0 ; 
 	font-size: 1.1em;
 	margin
 }
@@ -96,7 +100,7 @@ section {
 	text-decoration: none;
 	color: #222;
 	font-weight: bold;
-	padding: 12px 0;
+	padding: 16px 0;
 	text-align: center;
 	border: 1px solid #CCC; 
 	background: #FDFDFD; 
@@ -105,6 +109,11 @@ section {
 
 .inlineButton:hover, .singleButton:hover, .buttonLeft:hover, .buttonRight:hover {
 	background: #F1F1F1;
+}
+
+hr {
+	border: 1px solid #D5D5D5;
+	margin: 10px;
 }
 
 .description {
