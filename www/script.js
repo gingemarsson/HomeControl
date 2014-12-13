@@ -70,7 +70,7 @@ function updatePlannedList() {
 			listHTML += "<li>";
 			listHTML += "<h1>" + dateString + "</h1>";
 			listHTML += "<p>" + action.id + " " + action.command + "</p>";
-			listHTML += "<div class='rmPlanned'><a href='#' data-role='none' data-databaseId=" + action.id + " >&#215;</a></div></li>";
+			listHTML += "<div class='rmPlanned'><a href='#' data-role='none' data-databaseId=" + action.databaseId + " >&#215;</a></div></li>";
 			listHTML += "</li>";
 		});
 				
