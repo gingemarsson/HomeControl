@@ -8,6 +8,13 @@ $('a[data-command]').click(function (event) {
 	sendCommand("/cmd?cmd=" + $(this).attr("data-command"), "Kommando skickat: ")
  });
  
+ $('#doAdvancedCommand').click(function (event) {
+	event.preventDefault();
+	var actions = '[{"command":"' + $("#AC-command").val() + '","id":"' + $("#AC-id").val() + '", "delay": "' + $("#AC-delay").val() + '"}]';
+	
+	sendCommand("/cmd?cmd=" + actions, "Kommando skickat: ")
+});
+
  $('a[data-timeCommand]').click(function (event) {
 	event.preventDefault();
 	console.log("TEST");
@@ -26,17 +33,8 @@ $('a[data-command]').click(function (event) {
 	
 	sendCommand("/cmd?cmd=" + JSON.stringify(actions), "Kommando skickat: ");
 	
-	//Update the list now and after 0.3 ms incase of a delay.
-	setTimeout(updatePlannedList(), 300);
-	updatePlannedList();
+	updatePlannedListMultipleTimes();
  });
- 
-$('#doAdvancedCommand').click(function (event) {
-	event.preventDefault();
-	var actions = '[{"command":"' + $("#AC-command").val() + '","id":"' + $("#AC-id").val() + '", "delay": "' + $("#AC-delay").val() + '"}]';
-	
-	sendCommand("/cmd?cmd=" + actions, "Kommando skickat: ")
-});
 
 $('#addPlannedCommand').click(function (event) {
 	event.preventDefault();
@@ -48,9 +46,7 @@ $('#addPlannedCommand').click(function (event) {
 	
 	sendCommand("/cmd?cmd=" + actions, "Kommando skickat: ")
 	
-	//Update the list now and after 0.3 ms incase of a delay.
-	setTimeout(updatePlannedList(), 300)
-	updatePlannedList()
+	updatePlannedListMultipleTimes();
 });
 
 $('#refreshPlannedCommands').click(function (event) {
@@ -96,7 +92,7 @@ function updatePlannedList() {
 			ajax.done(function(response) {showStatus("Kommando borttaget: " + response);})
 			ajax.fail(function() {showStatus('FEL: Anslutningen kunde inte upprättas.');})
 			
-			updatePlannedList();
+			updatePlannedListMultipleTimes()
 		 });
 	});
 	
@@ -106,6 +102,12 @@ function updatePlannedList() {
 //------------------------
 // HELP FUNCTIONS
 //------------------------
+
+function updatePlannedListMultipleTimes(){
+	updatePlannedList();
+	setTimeout(updatePlannedList(), 300);
+	setTimeout(updatePlannedList(), 600);
+}
 
 function showStatus(status) {
 	$(".status").html(status)
