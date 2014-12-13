@@ -15,6 +15,7 @@ app.use("/index.html", function(req, res, next) {res.sendfile(__dirname + "/www/
 app.use("/script.js", function(req, res, next) {res.sendfile(__dirname + "/www/script.js");});
 app.use("/style.css", function(req, res, next) {res.sendfile(__dirname + "/www/style.css");});
 
+app.use("/jquery-1.11.1.min.js", function(req, res, next) {res.sendfile(__dirname + "/www/jquery-1.11.1.min.js");});
 
 //CMD
 app.use("/cmd" ,function(req, res, next){
