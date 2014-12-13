@@ -4,12 +4,12 @@
 
 //Button triggers
 $('a[data-command]').click(function (event) {
-	event.preventDefault(); //Förhindra scroll till toppen	
+	event.preventDefault();
 	sendCommand("/cmd?cmd=" + $(this).attr("data-command"), "Kommando skickat: ")
  });
  
  $('a[data-timeCommand]').click(function (event) {
-	event.preventDefault(); //Förhindra scroll till toppen
+	event.preventDefault();
 	console.log("TEST");
 	actions = JSON.parse($(this).attr("data-timeCommand"));
 	
@@ -113,7 +113,7 @@ function showStatus(status) {
 function sendCommand(command, message) {
 	var ajax = $.ajax(command)
 			
-	ajax.done(function(response) {showStatus(message + response);})
+	ajax.done(function(response) {showStatus(message + response.replace("<script>window.location = '/';</script>",""));})
 	ajax.fail(function() {showStatus('FEL: Anslutningen kunde inte upprättas.');})
 	
 	console.log("[CMD]: " + command);
