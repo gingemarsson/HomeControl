@@ -143,7 +143,7 @@ li:first-child {border-top: 0;}
 .rmPlanned {
 	font-size: 120px;
 	position: absolute;
-	top: -32px;
+	bottom: -35px;
 	right: 12px;
 }
 

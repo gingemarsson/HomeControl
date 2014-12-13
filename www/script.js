@@ -3,7 +3,8 @@
 //------------------------
 
 //Button triggers
-$('a[data-cmd]').click(function () {
+$('a[data-cmd]').click(function (event) {
+	event.preventDefault();
 	var actions = $(this).attr("data-cmd");
 	var ajax = $.ajax("/cmd?cmd=" + actions)
 	
@@ -13,7 +14,8 @@ $('a[data-cmd]').click(function () {
 	console.log("[CMD]: " + actions);
  });
  
-$('#doAdvancedCommand').click(function () {
+$('#doAdvancedCommand').click(function (event) {
+	event.preventDefault();
 	var actions = '[{"command":"' + $("#AC-command").val() + '","id":"' + $("#AC-id").val() + '", "delay": "' + $("#AC-delay").val() + '"}]';
 	var ajax = $.ajax("/cmd?cmd=" + actions)
 
@@ -23,7 +25,8 @@ $('#doAdvancedCommand').click(function () {
 	console.log("[CMD]: " + actions);
 });
 
-$('#addPlannedCommand').click(function () {
+$('#addPlannedCommand').click(function (event) {
+	event.preventDefault();
 	var timedate = new Date($("#AP-date").val() + " " + $("#AP-time").val())
 	
 	if (timedate == "Invalid Date") {alert("Invalid Date"); return}
@@ -45,15 +48,11 @@ $('#refreshPlannedCommands').click(function () {
 // PAGE LOAD EVENTS
 //------------------------
 
-//Insert current time into add planned action
-$('#addPlannedAction').on('pageshow', function() {
-	date = new Date();
-	$("#AP-time").val( ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2));
-	$("#AP-date").val( date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2));
-});
- 
 //Update list of planned actions
-$('#plannedActions').on('pageshow', function() {updatePlannedList();});
+updatePlannedList();
+date = new Date();
+$("#AP-time").val( ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2));
+$("#AP-date").val( date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2));
 
 function updatePlannedList() {
 	var ajax = $.ajax("/plannedActions")
