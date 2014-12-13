@@ -23,28 +23,28 @@
 		<div class="buttonset">
 			<p class="label">Skärmbelysning</p>
 			<div class="doublebutton">
-				<a href="#" data-cmd='[{"command":"on","id":"ScreenLamp"}]' class="buttonLeft" data-role="button">På</a>
-				<a href="#" data-cmd='[{"command":"off","id":"ScreenLamp"}]' class="buttonRight" data-role="button">Av</a>
+				<a href="#" data-command='[{"command":"on","id":"ScreenLamp"}]' class="buttonLeft" data-role="button">På</a>
+				<a href="#" data-command='[{"command":"off","id":"ScreenLamp"}]' class="buttonRight" data-role="button">Av</a>
 			</div>
 		</div>
 		<div class="buttonset">
 		<p class="label">Skrivbordsbelysning</p>               
 			<div class="doublebutton">
-				<a href="#" data-cmd='[{"command":"on","id":"DesktopLamp"}]' class="buttonLeft" data-role="button">På</a>
-				<a href="#" data-cmd='[{"command":"off","id":"DesktopLamp"}]' class="buttonRight" data-role="button">Av</a>
+				<a href="#" data-command='[{"command":"on","id":"DesktopLamp"}]' class="buttonLeft" data-role="button">På</a>
+				<a href="#" data-command='[{"command":"off","id":"DesktopLamp"}]' class="buttonRight" data-role="button">Av</a>
 			</div>
 		</div>
 		<div class="buttonset">
 		<p class="label">Sänglampa</p>
 			<div class="doublebutton">
-				<a href="#" data-cmd='[{"command":"on","id":"BedLamp"}]' class="buttonLeft" data-role="button">På</a>
-				<a href="#" data-cmd='[{"command":"off","id":"BedLamp"}]' class="buttonRight" data-role="button">Av</a>
+				<a href="#" data-command='[{"command":"on","id":"BedLamp"}]' class="buttonLeft" data-role="button">På</a>
+				<a href="#" data-command='[{"command":"off","id":"BedLamp"}]' class="buttonRight" data-role="button">Av</a>
 			</div>
 		</div>
 		
 		<hr />
 		<div class="buttonset">
-			<a href="#" data-cmd='[{"command":"off","id":"ScreenLamp"},{"command":"off","id":"BedLamp"},{"command":"off","id":"DesktopLamp"}]' class="singleButton">Stäng av allt</a>
+			<a href="#" data-command='[{"command":"off","id":"ScreenLamp"},{"command":"off","id":"BedLamp"},{"command":"off","id":"DesktopLamp"}]' class="singleButton">Stäng av allt</a>
 		</div>
 	</section>
 	<section>
@@ -53,32 +53,32 @@
 		<div class="buttonset">
 			<p class="label">Sk&#228;rmar</p>
 			<div class="doublebutton">
-				<a href="#" data-cmd='[{"command":"on","id":"ChristmasLamp"}]' class="buttonLeft" data-role="button">På</a>
-				<a href="#" data-cmd='[{"command":"off","id":"ChristmasLamp"}]' class="buttonRight" data-role="button">Av</a>
+				<a href="#" data-command='[{"command":"on","id":"ChristmasLamp"}]' class="buttonLeft" data-role="button">På</a>
+				<a href="#" data-command='[{"command":"off","id":"ChristmasLamp"}]' class="buttonRight" data-role="button">Av</a>
 			</div>
 		</div>
 		<div class="buttonset">
 			<p class="label">Julbelysning</p>
 			<div class="doublebutton">
-				<a href="#" data-cmd='[{"command":"on","id":"FanDevice"}]' class="buttonLeft" data-role="button">På</a>
-				<a href="#" data-cmd='[{"command":"off","id":"FanDevice"}]' class="buttonRight" data-role="button">Av</a>
+				<a href="#" data-command='[{"command":"on","id":"FanDevice"}]' class="buttonLeft" data-role="button">På</a>
+				<a href="#" data-command='[{"command":"off","id":"FanDevice"}]' class="buttonRight" data-role="button">Av</a>
 			</div>
 		</div>
 	</section>
 	<section>
 		<h1>Starta alla lampor:</h1>
 
-	    <a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"14400000"},{"command":"on","id":"ScreenLamp","timedate":"14400000"},{"command":"on","id":"DesktopLamp","timedate":"14400000"}]' class="inlineButton">06:00</a>
-        <a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"15300000"},{"command":"on","id":"ScreenLamp","timedate":"15300000"},{"command":"on","id":"DesktopLamp","timedate":"15300000"}]' class="inlineButton">06:15</a>
-        <a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"18000000"},{"command":"on","id":"ScreenLamp","timedate":"18000000"},{"command":"on","id":"DesktopLamp","timedate":"18000000"}]' class="inlineButton">07:00</a>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"18900000"},{"command":"on","id":"ScreenLamp","timedate":"18900000"},{"command":"on","id":"DesktopLamp","timedate":"18900000"}]' class="inlineButton">07:15</a>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"21600000"},{"command":"on","id":"ScreenLamp","timedate":"21600000"},{"command":"on","id":"DesktopLamp","timedate":"21600000"}]' class="inlineButton">08:00</a>
-        <a href="#" data-cmd='[{"command":"on","id":"BedLamp","timedate":"22500000"},{"command":"on","id":"ScreenLamp","timedate":"22500000"},{"command":"on","id":"DesktopLamp","timedate":"22500000"}]' class="inlineButton">08:15</a>
+	    <a href="#" data-timeCommand='[{"command":"on","id":"BedLamp","timedate":"06:00"},{"command":"on","id":"ScreenLamp","timedate":"06:00"},{"command":"on","id":"DesktopLamp","timedate":"06:00"}]' class="inlineButton">06:00</a>
+        <a href="#" data-timeCommand='[{"command":"on","id":"BedLamp","timedate":"06:15"},{"command":"on","id":"ScreenLamp","timedate":"06:15"},{"command":"on","id":"DesktopLamp","timedate":"06:15"}]' class="inlineButton">06:15</a>
+        <a href="#" data-timeCommand='[{"command":"on","id":"BedLamp","timedate":"07:00"},{"command":"on","id":"ScreenLamp","timedate":"07:00"},{"command":"on","id":"DesktopLamp","timedate":"07:00"}]' class="inlineButton">07:00</a>
+		<a href="#" data-timeCommand='[{"command":"on","id":"BedLamp","timedate":"07:15"},{"command":"on","id":"ScreenLamp","timedate":"07:15"},{"command":"on","id":"DesktopLamp","timedate":"07:15"}]' class="inlineButton">07:15</a>
+		<a href="#" data-timeCommand='[{"command":"on","id":"BedLamp","timedate":"08:00"},{"command":"on","id":"ScreenLamp","timedate":"08:00"},{"command":"on","id":"DesktopLamp","timedate":"08:00"}]' class="inlineButton">08:00</a>
+        <a href="#" data-timeCommand='[{"command":"on","id":"BedLamp","timedate":"08:15"},{"command":"on","id":"ScreenLamp","timedate":"08:15"},{"command":"on","id":"DesktopLamp","timedate":"08:15"}]' class="inlineButton">08:15</a>
 	</section>
 	<section>
 		<h1>Macros</h1>
-		<a href="#" data-cmd='[{"command":"on","id":"BedLamp"},{"command":"off","id":"ScreenLamp"},{"command":"off","id":"DesktopLamp"},{"command":"off","id":"ChristmasLamp"},{"command":"off","id":"FanDevice"}]' class="inlineButton">Bedtime</a>
-		<a href="#" data-cmd='[{"command":"on","id":"FanDevice"},{"command":"off","id":"FanDevice", "delay": "15"}]' class="inlineButton">Fläkt i 15 sec</a>
+		<a href="#" data-command='[{"command":"on","id":"BedLamp"},{"command":"off","id":"ScreenLamp"},{"command":"off","id":"DesktopLamp"},{"command":"off","id":"ChristmasLamp"},{"command":"off","id":"FanDevice"}]' class="inlineButton">Bedtime</a>
+		<a href="#" data-command='[{"command":"on","id":"FanDevice"},{"command":"off","id":"FanDevice", "delay": "15"}]' class="inlineButton">Fläkt i 15 sec</a>
 	</section>
 	<section>
 		<h1>Lägg till planerad händelse:</h1>

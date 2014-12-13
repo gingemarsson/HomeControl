@@ -3,26 +3,38 @@
 //------------------------
 
 //Button triggers
-$('a[data-cmd]').click(function (event) {
-	event.preventDefault();
-	var actions = $(this).attr("data-cmd");
-	var ajax = $.ajax("/cmd?cmd=" + actions)
+$('a[data-command]').click(function (event) {
+	event.preventDefault(); //Förhindra scroll till toppen	
+	sendCommand("/cmd?cmd=" + $(this).attr("data-command"), "Kommando skickat: ")
+ });
+ 
+ $('a[data-timeCommand]').click(function (event) {
+	event.preventDefault(); //Förhindra scroll till toppen
+	console.log("TEST");
+	actions = JSON.parse($(this).attr("data-timeCommand"));
 	
-	ajax.done(function(response) {$(".status").html("Kommando skickat: " + response.replace("<script>window.location = '/';</script>",""));})
-	ajax.fail(function() {$(".status").html('FEL: Anslutningen kunde inte upprättas.');})
 	
-	console.log("[CMD]: " + actions);
+	
+	actions.forEach(function(action){
+		timeString = action.timedate;
+		datetime = new Date(getDateString(new Date()) + " " + timeString);
+		
+		if (datetime < new Date().getTime()) {
+			datetime = new Date(getDateString(new Date(new Date().getTime() + 86400000)) + " " + timeString);
+		}
+		
+		action.timedate = datetime.getTime();
+	});
+	
+	
+	sendCommand("/cmd?cmd=" + JSON.stringify(actions), "Kommando skickat: ")
  });
  
 $('#doAdvancedCommand').click(function (event) {
 	event.preventDefault();
 	var actions = '[{"command":"' + $("#AC-command").val() + '","id":"' + $("#AC-id").val() + '", "delay": "' + $("#AC-delay").val() + '"}]';
-	var ajax = $.ajax("/cmd?cmd=" + actions)
-
-	ajax.done(function(response) {$(".status").html("Kommando skickat: " + response.replace("<script>window.location = '/';</script>",""));})
-	ajax.fail(function() {$(".status").html('FEL: Anslutningen kunde inte upprättas.');})
-
-	console.log("[CMD]: " + actions);
+	
+	sendCommand("/cmd?cmd=" + actions, "Kommando skickat: ")
 });
 
 $('#addPlannedCommand').click(function (event) {
@@ -30,15 +42,14 @@ $('#addPlannedCommand').click(function (event) {
 	var timedate = new Date($("#AP-date").val() + " " + $("#AP-time").val())
 	
 	if (timedate == "Invalid Date") {alert("Invalid Date"); return}
-	
+
 	var actions = '[{"command":"' + $("#AP-command").val() + '","id":"' + $("#AP-id").val() + '", "timedate": "' + timedate.getTime() + '"}]';
-	var ajax = $.ajax("/cmd?cmd=" + actions)
-
-	ajax.done(function(response) {$(".status").html("Kommando skickat: " + response.replace("<script>window.location = '/';</script>",""));})
-	ajax.fail(function() {$(".status").html('FEL: Anslutningen kunde inte upprättas.');})
-
-	updatePlannedList();
-	console.log("[CMD]: " + actions);
+	
+	sendCommand("/cmd?cmd=" + actions, "Kommando skickat: ")
+	
+	//Update the list now and after 0.3 ms incase of a delay.
+	setTimeout(updatePlannedList(), 300)
+	updatePlannedList()
 });
 
 $('#refreshPlannedCommands').click(function (event) {
@@ -52,9 +63,8 @@ $('#refreshPlannedCommands').click(function (event) {
 
 //Update list of planned actions
 updatePlannedList();
-date = new Date();
-$("#AP-time").val( ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2));
-$("#AP-date").val( date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2));
+$("#AP-time").val( getTimeString(new Date()));
+$("#AP-date").val( getDateString(new Date()));
 
 function updatePlannedList() {
 	var ajax = $.ajax("/plannedActions")
@@ -65,7 +75,7 @@ function updatePlannedList() {
 		
 		JSON.parse(response).forEach(function(action) {
 			var date = new Date(parseInt(action.timedate));
-			var dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" +	("0" + date.getDate()).slice(-2) + " " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
+			var dateString = getDateString(date) + " " + getTimeString(date);
 			
 			listHTML += "<li>";
 			listHTML += "<h1>" + dateString + "</h1>";
@@ -82,12 +92,37 @@ function updatePlannedList() {
 			event.preventDefault();
 			var ajax = $.ajax("/removePlannedAction?id=" + $(this).attr("data-databaseId") + "&rev=" + $(this).attr("data-databaseRev"))
 			
-			ajax.done(function(response) {$(".status").html("Kommando borttaget: " + response);})
-			ajax.fail(function() {$(".status").html('FEL: Anslutningen kunde inte upprättas.');})
+			ajax.done(function(response) {showStatus("Kommando borttaget: " + response);})
+			ajax.fail(function() {showStatus('FEL: Anslutningen kunde inte upprättas.');})
 			
 			updatePlannedList();
 		 });
 	});
 	
-	ajax.fail(function() {$(".status").html('FEL: Anslutningen kunde inte upprättas.');})
+	ajax.fail(function() {showStatus('FEL: Anslutningen kunde inte upprättas.');})
+}
+
+//------------------------
+// HELP FUNCTIONS
+//------------------------
+
+function showStatus(status) {
+	$(".status").html(status)
+}
+
+function sendCommand(command, message) {
+	//var ajax = $.ajax(command)
+			
+	//ajax.done(function(response) {showStatus(message + response);})
+	//ajax.fail(function() {showStatus('FEL: Anslutningen kunde inte upprättas.');})
+	
+	console.log("[CMD]: " + command);
+}
+
+function getDateString(date) {
+	return date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2);
+}
+
+function getTimeString(date) {
+	return ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
 }
