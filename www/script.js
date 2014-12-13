@@ -37,10 +37,12 @@ $('#addPlannedCommand').click(function (event) {
 	ajax.done(function(response) {$(".status").html("Kommando skickat: " + response.replace("<script>window.location = '/';</script>",""));})
 	ajax.fail(function() {$(".status").html('FEL: Anslutningen kunde inte upprättas.');})
 
+	updatePlannedList();
 	console.log("[CMD]: " + actions);
 });
 
-$('#refreshPlannedCommands').click(function () {
+$('#refreshPlannedCommands').click(function (event) {
+	event.preventDefault();
 	updatePlannedList();
 });
 
