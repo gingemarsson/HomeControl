@@ -42,10 +42,12 @@ $('#addPlannedCommand').click(function (event) {
 	
 	if (timedate == "Invalid Date") {alert("Invalid Date"); return}
 
-	var actions = '[{"command":"' + $("#AP-command").val() + '","id":"' + $("#AP-id").val() + '", "timedate": "' + timedate.getTime() + '"}]';
-	
-	sendCommand("/cmd?cmd=" + actions, "Kommando skickat: ")
-	
+	var action = {}
+	action.command = {type: "tellstick", task: $("#AP-command").val(), id: $("#AP-id").val()};
+	action.timedate = timedate.getTime();
+	action.repeatInterval = $("#AP-repeatInterval").val();
+		
+	sendCommand("/cmd?cmd=" + JSON.stringify([action]), "Kommando skickat: ")
 	updatePlannedListMultipleTimes();
 });
 
@@ -74,9 +76,16 @@ function updatePlannedList() {
 			var date = new Date(parseInt(action.timedate));
 			var dateString = getDateString(date) + " " + getTimeString(date);
 			
+			if (action.command.type == "tellstick"){
+				var description = action.command.id + " " + action.command.task ;
+			}
+			else if (action.command.type == "system"){
+				var description = action.command.task ;
+			}
+			
 			listHTML += "<li>";
 			listHTML += "<h1>" + dateString + "</h1>";
-			listHTML += "<p>" + action.id + " " + action.command + "</p>";
+			listHTML += "<p><span class='tag'>" + action.command.type + "</span> " + description + "</p>";
 			listHTML += "<div class='rmPlanned'><a href='#' data-role='none' data-databaseId=" + action.databaseId + " >&#215;</a></div></li>";
 			listHTML += "</li>";
 		});
@@ -116,7 +125,7 @@ function showStatus(status) {
 function sendCommand(command, message) {
 	var ajax = $.ajax(command)
 			
-	ajax.done(function(response) {showStatus(message + response.replace("<script>window.location = '/';</script>",""));})
+	ajax.done(function(response) {showStatus(response.replace("<script>window.location = '/';</script>",""));})
 	ajax.fail(function() {showStatus('FEL: Anslutningen kunde inte upprättas.');})
 	
 	console.log("[CMD]: " + command);

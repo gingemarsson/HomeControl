@@ -25,7 +25,7 @@
 	html .rmPlanned {
 		font-size: 55px;
 		position: absolute;
-		bottom: 20px;
+		bottom: 23px;
 		right: 12px;
 	}
 	
@@ -38,6 +38,10 @@
 	
 	input[type="text"] {
 		margin: 10px;
+	}
+	
+	ul {
+		padding-left: 20px;
 	}
 }
 
@@ -167,6 +171,7 @@ hr {
 	text-align: center; 
 	font-style: italic;
 	margin: 0 auto;
+	overflow-x: auto;
 }
 
 
@@ -193,10 +198,22 @@ li {
 
 li:first-child {border-top: 0;}
 
+span.tag {
+	font-weight: normal;
+	text-transform: capitalize;
+	font-size: 0.8em;
+	display: inline-block;
+	border: 1px solid #DDD;
+	padding: 2px;
+	border-radius: 2px;
+	background: #EEE;
+	color: #555;
+}
+
 .rmPlanned {
 	font-size: 120px;
 	position: absolute;
-	bottom: -35px;
+	bottom: -30px;
 	right: 12px;
 }
 
