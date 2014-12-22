@@ -12,15 +12,9 @@ Action = require("./action.js");
 // INITIATION
 //------------------------
 
-<<<<<<< HEAD
 //Bind webbserver to port 80
 app.listen(80); 
 console.log("[INFO]: Application listening at port 80");
-=======
-//Bind webbserver to port 8080
-app.listen(8080); 
-console.log("[INFO]: Application listening at port 8080");
->>>>>>> origin/refactoring
 
 //Read database from file
 database.readFile();
