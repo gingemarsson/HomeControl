@@ -46,7 +46,8 @@
 		<div class="buttonset">
 			<a href="#" data-command='[{"command":{"type":"tellstick","task":"off","id":"ScreenLamp"}},
 				{"command":{"type":"tellstick","task":"off","id":"BedLamp"}},
-				{"command":{"type":"tellstick","task":"off","id":"DesktopLamp"}}]' class="singleButton">Stäng av allt</a>
+				{"command":{"type":"tellstick","task":"off","id":"DesktopLamp"}},
+				{"command":{"type":"tellstick","task":"off","id":"FanDevice"}}]' class="singleButton">Stäng av allt</a>
 		</div>
 	</section>
 	<section>
@@ -83,7 +84,16 @@
 			{"command":{"type":"tellstick","task":"off","id":"ScreenLamp"}},
 			{"command":{"type":"tellstick","task":"off","id":"DesktopLamp"}},
 			{"command":{"type":"tellstick","task":"off","id":"FanDevice"}}]' class="inlineButton">Bedtime</a>
-		<a href="#" data-command='[{"command":{"type":"tellstick","task":"on","id":"FanDevice"}},{"command":{"type":"tellstick","task":"off","id":"FanDevice", "delay": "15"}}]' class="inlineButton">Julbelysning i 15 sec</a>
+			
+		<a href="#" data-command='[{"command":{"type":"tellstick","task":"on","id":"FanDevice"}},{"command":{"type":"tellstick","task":"off","id":"FanDevice"}, "delay": "15"}]' class="inlineButton">Julbelysning i 15 sec</a>
+		
+		<a href="#" data-command='[{"command":{"type":"tellstick","task":"on","id":"ScreenLamp"}},
+			{"command":{"type":"tellstick","task":"off","id":"ScreenLamp"}, "delay": "1"},
+			{"command":{"type":"tellstick","task":"on","id":"ScreenLamp"}, "delay": "2"},
+			{"command":{"type":"tellstick","task":"off","id":"ScreenLamp"}, "delay": "3"},
+			{"command":{"type":"tellstick","task":"on","id":"ScreenLamp"}, "delay": "4"},
+			{"command":{"type":"tellstick","task":"off","id":"ScreenLamp"}, "delay": "5"},
+			{"command":{"type":"tellstick","task":"on","id":"ScreenLamp"}, "delay": "6"}]' class="inlineButton">Fördröjningsdemo</a>
 	</section>
 	<section>
 		<h1>Lägg till planerad händelse:</h1>
@@ -167,6 +177,20 @@
 	<section>
 		<h1>Status:</h1>
 		<p class="description status">Resultat: n/a</p>
+	</section>
+	<section class="hidden system">
+		<h1>System:</h1>
+		
+		<div class="buttonset">
+			<a href="#" data-command='[{"command":{"type":"system","task":"checkDatabase"}}]' class="singleButton">Uppdatera databas</a>
+		</div>
+		<div class="buttonset">
+			<a href="#" data-command='[{"command":{"type":"system","task":"reboot"}}]' class="singleButton">Starta om</a>
+		</div>
+		<div class="buttonset">
+			<a href="#" data-command='[{"command":{"type":"system","task":"shutdown"}}]' class="singleButton">Stäng av</a>
+		</div>
+		
 	</section>
 	</div>
 	<script src="script.js"></script>

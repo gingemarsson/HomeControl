@@ -42,8 +42,9 @@ Action.prototype.execute = function() { //Check if the action should be executed
 			this._doAction();
 		}
 		else {
+			var thisAction = this; //Fix for incorrect this in the setTimeout
 			setTimeout(function(){
-				this._doAction();
+				thisAction._doAction();
 			}, (this.delay * 1000)); //Times 1000 to make ms
 		}
 		return true;

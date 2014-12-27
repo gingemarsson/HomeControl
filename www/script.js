@@ -56,6 +56,11 @@ $('#refreshPlannedCommands').click(function (event) {
 	updatePlannedList();
 });
 
+$('header h1').click(function (event) {
+	event.preventDefault();
+	$(".system").toggle();
+});
+
 //------------------------
 // PAGE LOAD EVENTS
 //------------------------
@@ -76,17 +81,24 @@ function updatePlannedList() {
 			var date = new Date(parseInt(action.timedate));
 			var dateString = getDateString(date) + " " + getTimeString(date);
 			
-			if (action.command.type == "tellstick"){
-				var description = action.command.id + " " + action.command.task ;
-			}
-			else if (action.command.type == "system"){
-				var description = action.command.task ;
-			}
+			if (action.command.type == "tellstick"){ var description = action.command.id + " " + action.command.task ;}
+			else if (action.command.type == "system"){ var description = action.command.task ;}			
+			
+			if (action.repeatInterval != 0) {var repeatIntervalTag = "<span class='tag'>Repeat (" + action.repeatInterval / 3600000 + "h)</span> "; }
+			else {var repeatIntervalTag = ""; }
+			
+			var commandTypeTag = "<span class='tag'>" + action.command.type + "</span> ";
 			
 			listHTML += "<li>";
 			listHTML += "<h1>" + dateString + "</h1>";
-			listHTML += "<p><span class='tag'>" + action.command.type + "</span> " + description + "</p>";
-			listHTML += "<div class='rmPlanned'><a href='#' data-role='none' data-databaseId=" + action.databaseId + " >&#215;</a></div></li>";
+			listHTML += "<p>";
+
+			listHTML += repeatIntervalTag;
+			listHTML += commandTypeTag;
+			listHTML += description;
+			
+			listHTML += "</p>";
+			listHTML += "<div class='rmPlanned'><a href='#' data-databaseId=" + action.databaseId + " >&#215;</a></div></li>";
 			listHTML += "</li>";
 		});
 				

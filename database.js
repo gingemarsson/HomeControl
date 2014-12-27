@@ -34,6 +34,7 @@ Database.prototype.checkDB = function() { //Check if commands should be executed
 	var thisDatabase = this;
 	
 	var actionsToRemove = [];
+	var actionsToAdd = [];
 	
 	this.data.forEach(function(action) {
 		executed = action.execute();
@@ -42,8 +43,8 @@ Database.prototype.checkDB = function() { //Check if commands should be executed
 			
 			//If the action has a repeatInterval re-add it to the database
 			if (action.repeatInterval != "" && action.repeatInterval > 0) {
-				action.timedate = +action.timedate + +action.repeatInterval; //Update the timedate
-				thisDatabase.addToDB(action);
+				action.timedate = (+action.timedate) + (+action.repeatInterval); //Update the timedate
+				actionsToAdd.push(action);
 			}
 		}
 	});
@@ -51,6 +52,11 @@ Database.prototype.checkDB = function() { //Check if commands should be executed
 	//Remove the executed actions
 	actionsToRemove.forEach(function(databaseId){
 		thisDatabase.removeFromDB(databaseId);
+	});
+	
+	//Add actions that has a repeatInterval
+	actionsToAdd.forEach(function(action){
+		thisDatabase.addToDB(action);
 	});
 	
 	console.log("[DB] Database check done");
@@ -74,11 +80,12 @@ Database.prototype.addToDB = function(action){ //Add an action to the DB
 	this.data.push(action);
 		
 	this.dataChangedSinceLastUpdate = true;
-	console.log("[DB] CMD added to DB:" + JSON.stringify(action));
+	
+	console.log("[DB] Command added to database (Id: " + action.databaseId + ")");
 }
 
 Database.prototype.getPlannedActions = function(callback) { //Execute function callback with the database data (sorted by date) as argument
-	sortedData = this.data;
+	sortedData = this.data.slice(0);
 	sortedData.sort(function(a,b){return a.timedate - b.timedate});
 	callback(JSON.stringify(sortedData));
 }
