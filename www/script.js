@@ -2,20 +2,22 @@
 // BUTTONS EVENTS
 //------------------------
 
+
 //Button triggers
-$('a[data-command]').click(function (event) {
+$(document).on('click', 'a[data-command]', function (event) {
+	console.log("test");
 	event.preventDefault();
 	sendCommand("/cmd?cmd=" + $(this).attr("data-command"), "Kommando skickat: ")
  });
  
- $('#doAdvancedCommand').click(function (event) {
+$(document).on('click', '#doAdvancedCommand', function (event) {
 	event.preventDefault();
 	var actions = '[{"command":"' + $("#AC-command").val() + '","id":"' + $("#AC-id").val() + '", "delay": "' + $("#AC-delay").val() + '"}]';
 	
 	sendCommand("/cmd?cmd=" + actions, "Kommando skickat: ")
 });
 
- $('a[data-timeCommand]').click(function (event) {
+$(document).on('click', 'a[data-timeCommand]', function (event) {
 	event.preventDefault();
 	console.log("TEST");
 	actions = JSON.parse($(this).attr("data-timeCommand"));
@@ -36,14 +38,14 @@ $('a[data-command]').click(function (event) {
 	updatePlannedListMultipleTimes();
  });
 
-$('#addPlannedCommand').click(function (event) {
+$(document).on('click', '#addPlannedCommand', function (event) {
 	event.preventDefault();
 	var timedate = new Date($("#AP-date").val() + " " + $("#AP-time").val())
 	
 	if (timedate == "Invalid Date") {alert("Invalid Date"); return}
 
 	var action = {}
-	action.command = {type: "tellstick", task: $("#AP-command").val(), id: $("#AP-id").val()};
+	action.command = {type: "tellstick", task: $("#AP-command").val(), id: $("#AP-device").val()};
 	action.timedate = timedate.getTime();
 	action.repeatInterval = $("#AP-repeatInterval").val();
 		
@@ -51,24 +53,26 @@ $('#addPlannedCommand').click(function (event) {
 	updatePlannedListMultipleTimes();
 });
 
-$('#refreshPlannedCommands').click(function (event) {
+$(document).on('click', '#refreshPlannedCommands', function (event) {
 	event.preventDefault();
 	updatePlannedList();
 });
 
-$('header h1').click(function (event) {
+$(document).on('click', 'header h1', function (event) {
 	event.preventDefault();
-	$(".system").toggle();
+	$(".hidden").toggle();
 });
 
 //------------------------
 // PAGE LOAD EVENTS
 //------------------------
 
-//Update list of planned actions
-updatePlannedList();
-$("#AP-time").val( getTimeString(new Date()));
-$("#AP-date").val( getDateString(new Date()));
+function pageLoadActions() {
+	//Update list of planned actions
+	updatePlannedList();
+	$("#AP-time").val( getTimeString(new Date()));
+	$("#AP-date").val( getDateString(new Date()));
+}
 
 function updatePlannedList() {
 	var ajax = $.ajax("/plannedActions")

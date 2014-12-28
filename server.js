@@ -28,11 +28,11 @@ setInterval( function(){database.update()}, 10000);
 // WEBSERVER
 //------------------------
 
-//Static files
-app.use("/index.html", function(req, res, next) {res.sendfile(__dirname + "/www/index.html");});
-app.use("/script.js", function(req, res, next) {res.sendfile(__dirname + "/www/script.js");});
-app.use("/style.css", function(req, res, next) {res.sendfile(__dirname + "/www/style.css");});
-app.use("/jquery-1.11.1.min.js", function(req, res, next) {res.sendfile(__dirname + "/www/jquery-1.11.1.min.js");});
+//Static files in the www-folder
+app.use(express.static(__dirname + '/www'));
+
+//The content of the website
+app.use("/websiteContent", function(req, res, next) {res.sendfile(__dirname + "/website.txt");});
 
 //Run or add the specified commands
 app.use("/cmd" ,function(req, res, next){
