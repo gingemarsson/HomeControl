@@ -6,13 +6,9 @@
 }
 
 @media all and (max-width: 640px) {
-	div.buttonset {
+	div.buttonSet {
 		display: block;
 		margin: 10px;
-	}
-	.inlineButton {
-		display: block;
-		
 	}
 	html hr {
 		margin: 10px;
@@ -51,7 +47,7 @@
 		margin: 10px auto;
 	}
 	
-	.buttonset {
+	.buttonSet {
 		width: 270px;
 	}
 }
@@ -62,7 +58,7 @@
 		margin: 10px auto;
 	}
 	
-	.buttonset {
+	.buttonSet {
 		width: 270px;
 	}
 }
@@ -94,25 +90,23 @@ section {
 	padding-top: 0;
 }
 
-.hidden {display: none;}
+.label {
+	margin: 0 0 10px 0 ; 
+	font-size: 1.1em;
+	margin
+}
 
-.buttonset {
+.buttonSet {
 	height: 68px;
 	display: inline-block;
 	margin: 10px
 }
 
-.doublebutton {
+.doubleButton {
 	position: relative;
 	margin: 0;
 	padding: 0;
 	bottom: -45px;
-}
-
-.label {
-	margin: 0 0 10px 0 ; 
-	font-size: 1.1em;
-	margin
 }
 
 .buttonLeft, .buttonRight{
@@ -176,6 +170,7 @@ hr {
 	overflow-x: auto;
 }
 
+.hidden {display: none;}
 
 input[type="text"], select {
 	font-size: 1.3em;

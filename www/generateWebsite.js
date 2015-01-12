@@ -55,16 +55,16 @@ function generateElement(element){
 			break;
 			
 		case "doubleButton":
-			htmlString = "<div class='buttonset'>";
+			htmlString = "<div class='buttonSet'>";
 			htmlString += "<p class='label'>" + element.label + "</p>";
-			htmlString += "<div class='doublebutton'>";
+			htmlString += "<div class='doubleButton'>";
 			htmlString += "<a href='#' " + commandKey + "='" + JSON.stringify(element.commandLeft) + "' class='buttonLeft' data-role='button'>" + element.labelLeft + "</a>";
 			htmlString += "<a href='#' " + commandKey + "='" + JSON.stringify(element.commandRight) + "' class='buttonRight' data-role='button'>" + element.labelRight + "</a>";
 			htmlString += "</div></div>";
 			break;
 			
 		case "singleButton":
-			htmlString = "<div class='buttonset'>";
+			htmlString = "<div class='buttonSet'>";
 			htmlString += "<a href='#' " + commandKey + "='" + JSON.stringify(element.command) + "' class='singleButton' data-role='button'>" + element.label + "</a>";
 			htmlString += "</div>";
 			break;
