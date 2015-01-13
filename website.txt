@@ -1,6 +1,6 @@
 [
 	{"header": "Mina Lampor", "content": [
-		{"type":"doubleButton", "label": "Skärmbelysning", "labelLeft":"På", "labelRight":"Av", "commandLeft":[{"command":{"type":"tellstick","task":"on","id":"ScreenLamp"}}], "commandRight":[{"command":{"type":"tellstick","task":"off","id":"DesktopLamp"}}]},
+		{"type":"doubleButton", "label": "Skärmbelysning", "labelLeft":"På", "labelRight":"Av", "commandLeft":[{"command":{"type":"tellstick","task":"on","id":"ScreenLamp"}}], "commandRight":[{"command":{"type":"tellstick","task":"off","id":"ScreenLamp"}}]},
 		{"type":"doubleButton", "label": "Skrivbordsbelysning", "labelLeft":"På", "labelRight":"Av", "commandLeft":[{"command":{"type":"tellstick","task":"on","id":"DesktopLamp"}}], "commandRight":[{"command":{"type":"tellstick","task":"off","id":"DesktopLamp"}}]},
 		{"type":"doubleButton", "label": "Sänglampa", "labelLeft":"På", "labelRight":"Av", "commandLeft":[{"command":{"type":"tellstick","task":"on","id":"BedLamp"}}], "commandRight":[{"command":{"type":"tellstick","task":"off","id":"BedLamp"}}]},
 		{"type":"dividerLine"},
