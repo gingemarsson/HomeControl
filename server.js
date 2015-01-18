@@ -9,18 +9,25 @@ database = new Database('data.txt');
 Action = require("./action.js");
 
 //------------------------
+// CONFIGURATION
+//------------------------
+
+var PORT = 80;
+var UPDATEINTERVAL = 10000;
+
+//------------------------
 // INITIATION
 //------------------------
 
-//Bind webbserver to port 80
-app.listen(80); 
-console.log("[INFO]: Application listening at port 80");
+//Bind webbserver to port PORT
+app.listen(PORT); 
+console.log("[INFO]: Application listening at port " + PORT);
 
 //Read database from file
 database.readFile();
 
 //Update database every 10 sec
-setInterval( function(){database.update()}, 10000);
+setInterval( function(){database.update()}, UPDATEINTERVAL);
 
 
 
