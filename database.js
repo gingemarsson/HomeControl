@@ -11,6 +11,12 @@
 //Require methods to modify filesystem
 var fs = require('fs');
 
+//Set up stuff for sun calculation
+var sunCalc = require('suncalc');
+var availableTimes = ["sunrise", "sunriseEnd", "goldenHourEnd", "solarNoon", "goldenHour", "sunsetStart", "sunset", "dusk", "nauticalDusk", "night", "nadir", "nightEnd", "nauticalDawn", "dawn"];
+var LAT = 59;
+var LONG = 18;
+
 //Constructor
 function Database(filename) {
 	this.data = [];
@@ -41,10 +47,22 @@ Database.prototype.checkDB = function() { //Check if commands should be executed
 		if (executed) {
 			actionsToRemove.push(action.databaseId);
 			
-			//If the action has a repeatInterval re-add it to the database
+			//If the action has a numeric repeatInterval re-add it to the database
 			if (action.repeatInterval != "" && action.repeatInterval > 0) {
 				action.timedate = (+action.timedate) + (+action.repeatInterval); //Update the timedate
 				actionsToAdd.push(action);
+			}
+			//If the repeatInterval is a string from sunCalc, calculate time of the specified event
+			else if (availableTimes.indexOf(action.repeatInterval) >= 0)
+			{
+				if (sunCalc.getTimes(new Date(), LAT, LONG).sunrise.getTime() >= new Date().getTime()){ //If time of event today is after current time, use it
+					action.timedate = sunCalc.getTimes(new Date(), LAT, LONG)[action.repeatInterval].getTime();
+				}
+				else { //Else, use tomorrows event instead
+					action.timedate = sunCalc.getTimes(new Date(new Date().getTime() + 86400000), LAT, LONG)[action.repeatInterval].getTime();
+				}
+				actionsToAdd.push(action);
+				console.log(action.repeatInterval + " detected");
 			}
 		}
 	});

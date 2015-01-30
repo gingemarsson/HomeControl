@@ -196,7 +196,6 @@ li:first-child {border-top-color: transparent;}
 
 span.tag {
 	font-weight: normal;
-	text-transform: capitalize;
 	font-size: 0.8em;
 	display: inline-block;
 	border: 1px solid #DDD;
@@ -204,6 +203,10 @@ span.tag {
 	border-radius: 2px;
 	background: #EEE;
 	color: #555;
+}
+
+span.tag.commandTag {
+	text-transform: capitalize;
 }
 
 .rmPlanned {

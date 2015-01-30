@@ -88,10 +88,11 @@ function updatePlannedList() {
 			if (action.command.type == "tellstick"){ var description = action.command.id + " " + action.command.task ;}
 			else if (action.command.type == "system"){ var description = action.command.task ;}			
 			
-			if (action.repeatInterval != 0) {var repeatIntervalTag = "<span class='tag'>Repeat (" + action.repeatInterval / 3600000 + "h)</span> "; }
+			if (action.repeatInterval != 0 && typeof action.repeatInterval == "number") {var repeatIntervalTag = "<span class='tag'>Repeat (" + action.repeatInterval / 3600000 + "h)</span> "; }
+			else if (action.repeatInterval != "undefined" && typeof action.repeatInterval == "string") {var repeatIntervalTag = "<span class='tag repeatTag'>Repeat (" + action.repeatInterval + ")</span> "; }
 			else {var repeatIntervalTag = ""; }
 			
-			var commandTypeTag = "<span class='tag'>" + action.command.type + "</span> ";
+			var commandTypeTag = "<span class='tag commandTag'>" + action.command.type + "</span> ";
 			
 			listHTML += "<li>";
 			listHTML += "<h1>" + dateString + "</h1>";

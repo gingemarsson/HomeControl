@@ -16,7 +16,7 @@ function Action (command, delay, timedate, repeatInterval) {
 	//Variables
 	this.delay = String(delay).replace(/[^0-9]/g,"");
 	this.timedate = String(timedate).replace(/[^0-9]/g,"");
-	this.repeatInterval = String(repeatInterval).replace(/[^0-9]/g,"");
+	this.repeatInterval = String(repeatInterval).replace(/[^0-9|a-z|A-Z]/g,"");
 	this.command = command;
 	
 	
