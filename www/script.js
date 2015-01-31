@@ -42,11 +42,12 @@ $(document).on('click', '#addPlannedCommand', function (event) {
 	event.preventDefault();
 	var timedate = new Date($("#AP-date").val() + " " + $("#AP-time").val())
 	
-	if (timedate == "Invalid Date") {alert("Invalid Date"); return}
+	if (timedate == "Invalid Date") {/*alert("Invalid Date");*/ timedate = $("#AP-date").val();}
+	else {timedate = timedate.getTime();}
 
 	var action = {}
 	action.command = {type: "tellstick", task: $("#AP-command").val(), id: $("#AP-device").val()};
-	action.timedate = timedate.getTime();
+	action.timedate = timedate;
 	action.repeatInterval = $("#AP-repeatInterval").val();
 		
 	sendCommand("/cmd?cmd=" + JSON.stringify([action]), "Kommando skickat: ")

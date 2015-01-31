@@ -7,6 +7,7 @@ var Database = require("./database.js");
 database = new Database('data.txt');
 
 Action = require("./action.js");
+TimeManager = require("./timeManager.js");
 
 //------------------------
 // CONFIGURATION
@@ -14,6 +15,7 @@ Action = require("./action.js");
 
 var PORT = 80;
 var UPDATEINTERVAL = 10000;
+TimeManager.setLocation(59, 18);
 
 //------------------------
 // INITIATION
@@ -47,6 +49,8 @@ app.use("/cmd" ,function(req, res, next){
 	var actionsRaw = JSON.parse(req.query.cmd);
 	
 	actionsRaw.forEach(function(actionRaw) {
+		if(isNaN(actionRaw.timedate)) {actionRaw.timedate = TimeManager.getTime(actionRaw.timedate);}
+	
 		action = new Action(actionRaw.command, actionRaw.delay, actionRaw.timedate, actionRaw.repeatInterval);
 				
 		//If the actions isn't executed, add it to the database
