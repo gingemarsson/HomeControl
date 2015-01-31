@@ -25,16 +25,21 @@ function generateWebsite(data) {
 	console.log("Parsed JSON (" + (Date.now() - time) + " ms)");
 
 	data.forEach(function(section){
-		
-		if (section.hidden) {htmlString += "<section class='hidden'>";}
-		else {htmlString += "<section>";}
-		
-		htmlString += "<h1>" + section.header + "</h1>";
-		
-		section.content.forEach(function(element){
-			htmlString += generateElement(element);
-		});
-		
+		//Page-wide settings
+		if (section.pageSettings) {
+			htmlString += "<div class='connectionError'>" + section.connectionErrorMessage + "</div>";
+			document.title = section.title == undefined ? "Home Control." : section.title;
+		}
+		else {
+			if (section.hidden) {htmlString += "<section class='hidden'>";}
+			else {htmlString += "<section>";}
+			
+			htmlString += "<h1>" + section.header + "</h1>";
+			
+			section.content.forEach(function(element){
+				htmlString += generateElement(element);
+			});
+		}
 		htmlString += "</section>";
 	});
 	
@@ -82,10 +87,10 @@ function generateElement(element){
 			element.repeatIntervalChoices.forEach(function(choice){htmlString += "<option value='" + choice.value + "'>" + choice.label + "</option>";});
 			htmlString += "</select>";
 			
-			htmlString += "<label for='AP-date' class='select'>Datum:</label><input type='text' id='AP-date' id='AP-date' placeholder='YYYY-MM-DD'></input>";
-			htmlString += "<label for='AP-time' class='select'>Tid:</label><input type='text' id='AP-time' id='AP-time' placeholder='HH:MM'></input>";
+			htmlString += "<label for='AP-date' class='select'>" + element.dateLabel + "</label><input type='text' id='AP-date' id='AP-date' placeholder='YYYY-MM-DD'></input>";
+			htmlString += "<label for='AP-time' class='select'>" + element.timeLabel + "</label><input type='text' id='AP-time' id='AP-time' placeholder='HH:MM'></input>";
 			
-			htmlString += "<a href='#' class='inlineButton' id='addPlannedCommand'>Lägg till</a>";
+			htmlString += "<a href='#' class='inlineButton' id='addPlannedCommand'>" + element.submitLabel + "</a>";
 			break;
 			
 		case "listOfPlanned":
