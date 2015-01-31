@@ -143,7 +143,7 @@ function sendCommand(command, message) {
 	var ajax = $.ajax(command)
 			
 	ajax.done(function(response) {showStatus(response.replace("<script>window.location = '/';</script>",""));})
-	ajax.fail(function() {connectionErrorAlert();})
+	ajax.fail(function() {connectionErrorAlert(command);})
 	
 	console.log("[CMD]: " + command);
 }
@@ -157,8 +157,11 @@ function getTimeString(date) {
 }
 
 var tryingToConnect = false;
+var commandsToExecute = [];
 
-function connectionErrorAlert() {
+function connectionErrorAlert(command) {
+	if (command != undefined) {commandsToExecute.push(command);} //Add command to list of commands to execute when connection is regained.
+
 	if (tryingToConnect) {return;} //Make sure only one instance of trying to connect is run at the same time
 	$(".connectionError").show();
 	showStatus('FEL: Anslutningen kunde inte upprättas.');
@@ -175,6 +178,11 @@ function connectionErrorAlert() {
 			clearInterval(loop);
 			$(".connectionError").fadeOut()
 			tryingToConnect = false;
+			
+			//Send waiting commands and update planned actions
+			commandsToExecute.forEach(function(command){sendCommand(command);});
+			commandsToExecute = [];
+			updatePlannedListMultipleTimes();
 		});
 		
 	
