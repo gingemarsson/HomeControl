@@ -39,6 +39,14 @@
 	ul {
 		padding-left: 20px;
 	}
+	
+	div.connectionError {
+		left: 0px;
+		right: 0px;
+		bottom: 0px;
+		font-size: 0.8em;
+		height:	14px;
+	}
 }
 
 @media all and (min-width: 640px) and (max-width: 1050px){
@@ -223,4 +231,18 @@ span.tag.commandTag {
 
 .rmPlanned a:hover {
 	color: #222;
+}
+
+.connectionError {
+	display: none;
+    text-decoration: none;  
+	text-align: center;  
+    border: 1px solid #992222;
+    background: #881111;
+    height: 18px;
+    color: #FFF;
+    position: fixed;
+    padding: 16px;
+    bottom:  10px;
+    left: 10px;
 }

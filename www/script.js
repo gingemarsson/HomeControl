@@ -116,13 +116,13 @@ function updatePlannedList() {
 			var ajax = $.ajax("/removePlannedAction?id=" + $(this).attr("data-databaseId") + "&rev=" + $(this).attr("data-databaseRev"))
 			
 			ajax.done(function(response) {showStatus("Kommando borttaget: " + response);})
-			ajax.fail(function() {showStatus('FEL: Anslutningen kunde inte upprättas.');})
+			ajax.fail(function() {connectionErrorAlert();})
 			
 			updatePlannedListMultipleTimes()
 		 });
 	});
 	
-	ajax.fail(function() {showStatus('FEL: Anslutningen kunde inte upprättas.');})
+	ajax.fail(function() {connectionErrorAlert();})
 }
 
 //------------------------
@@ -143,7 +143,7 @@ function sendCommand(command, message) {
 	var ajax = $.ajax(command)
 			
 	ajax.done(function(response) {showStatus(response.replace("<script>window.location = '/';</script>",""));})
-	ajax.fail(function() {showStatus('FEL: Anslutningen kunde inte upprättas.');})
+	ajax.fail(function() {connectionErrorAlert();})
 	
 	console.log("[CMD]: " + command);
 }
@@ -154,4 +154,30 @@ function getDateString(date) {
 
 function getTimeString(date) {
 	return ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
+}
+
+var tryingToConnect = false;
+
+function connectionErrorAlert() {
+	if (tryingToConnect) {return;} //Make sure only one instance of trying to connect is run at the same time
+	$(".connectionError").show();
+	showStatus('FEL: Anslutningen kunde inte upprättas.');
+	
+	tryingToConnect = true;
+	var updateInterval = 1000;
+	
+	var loop = setInterval( function(){
+		console.log("[INFO]: Trying to connect...");
+		var ajax = $.ajax("/plannedActions");
+		
+		ajax.fail(function() {}); //Continue looping
+		ajax.done(function(response) {
+			clearInterval(loop);
+			$(".connectionError").fadeOut()
+			tryingToConnect = false;
+		});
+		
+	
+	}, updateInterval);
+
 }
