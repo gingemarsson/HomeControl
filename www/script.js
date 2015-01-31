@@ -141,8 +141,12 @@ function showStatus(status) {
 
 function sendCommand(command, message) {
 	var ajax = $.ajax(command)
+	var timer = setTimeout(connectionErrorAlert, 750);
 			
-	ajax.done(function(response) {showStatus(response.replace("<script>window.location = '/';</script>",""));})
+	ajax.done(function(response) {
+		showStatus(response.replace("<script>window.location = '/';</script>",""));
+		clearTimeout(timer);
+	})
 	ajax.fail(function() {connectionErrorAlert(command);})
 	
 	console.log("[CMD]: " + command);
