@@ -62,7 +62,7 @@ Database.prototype.checkDB = function() { //Check if commands should be executed
 					action.timedate = sunCalc.getTimes(new Date(new Date().getTime() + 86400000), LAT, LONG)[action.repeatInterval].getTime();
 				}
 				actionsToAdd.push(action);
-				console.log(action.repeatInterval + " detected");
+				//console.log(action.repeatInterval + " detected");
 			}
 		}
 	});

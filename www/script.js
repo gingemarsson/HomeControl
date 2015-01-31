@@ -89,7 +89,7 @@ function updatePlannedList() {
 			else if (action.command.type == "system"){ var description = action.command.task ;}			
 			
 			if (action.repeatInterval != 0 && !isNaN(action.repeatInterval)) {var repeatIntervalTag = "<span class='tag'>Repeat (" + action.repeatInterval / 3600000 + "h)</span> "; }
-			else if (action.repeatInterval != "undefined" && typeof action.repeatInterval == "string") {var repeatIntervalTag = "<span class='tag repeatTag'>Repeat (" + action.repeatInterval + ")</span> "; }
+			else if (action.repeatInterval != "undefined" && isNaN(action.repeatInterval)) {var repeatIntervalTag = "<span class='tag repeatTag'>Repeat (" + action.repeatInterval + ")</span> "; }
 			else {var repeatIntervalTag = ""; }
 			
 			var commandTypeTag = "<span class='tag commandTag'>" + action.command.type + "</span> ";
