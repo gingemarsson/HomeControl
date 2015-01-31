@@ -24,12 +24,12 @@ $(document).on('click', 'a[data-timeCommand]', function (event) {
 	
 	actions.forEach(function(action){
 		timeString = action.timedate;
-		datetime = new Date(getDateString(new Date()) + " " + timeString);
+		datetime = new Date(getDateString(new Date()) + "T" + timeString);
 		
 		if (datetime < new Date().getTime()) {
-			datetime = new Date(getDateString(new Date(new Date().getTime() + 86400000)) + " " + timeString);
+			datetime = new Date(getDateString(new Date(new Date().getTime() + 86400000)) + "T" + timeString);
 		}
-		
+		console.log(datetime);
 		action.timedate = datetime.getTime();
 	});
 	
@@ -40,7 +40,7 @@ $(document).on('click', 'a[data-timeCommand]', function (event) {
 
 $(document).on('click', '#addPlannedCommand', function (event) {
 	event.preventDefault();
-	var timedate = new Date($("#AP-date").val() + " " + $("#AP-time").val())
+	var timedate = new Date($("#AP-date").val() + "T" + $("#AP-time").val())
 	
 	if (timedate == "Invalid Date") {/*alert("Invalid Date");*/ timedate = $("#AP-date").val();}
 	else {timedate = timedate.getTime();}
