@@ -24,13 +24,13 @@ $(document).on('click', 'a[data-timeCommand]', function (event) {
 	
 	actions.forEach(function(action){
 		timeString = action.timedate;
-		datetime = new Date(getDateString(new Date()) + "T" + timeString);
+		datetime = new Date(getDateString(new Date()) + "T" + timeString + "Z");
 		
 		if (datetime < new Date().getTime()) {
-			datetime = new Date(getDateString(new Date(new Date().getTime() + 86400000)) + "T" + timeString);
+			datetime = new Date(getDateString(new Date(new Date().getTime() + 86400000)) + "T" + timeString + "Z");
 		}
 		console.log(datetime);
-		action.timedate = datetime.getTime();
+		action.timedate = datetime.getTime() + new Date().getTimezoneOffset()*60*1000;
 	});
 	
 	sendCommand("/cmd?cmd=" + JSON.stringify(actions), "Kommando skickat: ");
@@ -40,10 +40,10 @@ $(document).on('click', 'a[data-timeCommand]', function (event) {
 
 $(document).on('click', '#addPlannedCommand', function (event) {
 	event.preventDefault();
-	var timedate = new Date($("#AP-date").val() + "T" + $("#AP-time").val())
+	var timedate = new Date($("#AP-date").val() + "T" + $("#AP-time").val() + "Z")
 	
 	if (timedate == "Invalid Date") {/*alert("Invalid Date");*/ timedate = $("#AP-date").val();}
-	else {timedate = timedate.getTime();}
+	else {timedate = timedate.getTime() + new Date().getTimezoneOffset()*60*1000;}
 
 	var action = {}
 	action.command = {type: "tellstick", task: $("#AP-command").val(), id: $("#AP-device").val()};
