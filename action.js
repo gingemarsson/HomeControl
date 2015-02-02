@@ -63,6 +63,10 @@ Action.prototype._doAction = function(){ //This method contains the action-speci
 			if(this.command.task == "checkDatabase"){
 				database.update();
 			}
+			if(this.command.task == "exit"){
+				console.log("[CMD] Exiting script");
+				process.exit();
+			}
 			if(this.command.task == "reboot"){
 				console.log("[CMD] System going down for reboot");
 				exec("sudo reboot")
