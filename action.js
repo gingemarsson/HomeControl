@@ -10,6 +10,8 @@
 //Require methods to execute commands
 var exec = require('child_process').exec;
 
+var allowSystemActions = false;
+
 //Constructor
 function Action (command, delay, timedate, repeatInterval) {
 
@@ -60,23 +62,30 @@ Action.prototype._doAction = function(){ //This method contains the action-speci
 			exec("tdtool --" + this.command.task + " " + this.command.id); //Execute command
 			break;
 		case "system":
-			if(this.command.task == "checkDatabase"){
-				database.update();
-			}
-			if(this.command.task == "exit"){
-				console.log("[CMD] Exiting script");
-				process.exit();
-			}
-			if(this.command.task == "reboot"){
-				console.log("[CMD] System going down for reboot");
-				exec("sudo reboot")
-			}
-			if(this.command.task == "shutdown"){
-				console.log("[CMD] System halt!");
-				exec("sudo halt")
+			if (allowSystemActions) {
+				if(this.command.task == "checkDatabase"){
+					database.update();
+				}
+				if(this.command.task == "exit"){
+					console.log("[CMD] Exiting script");
+					process.exit();
+				}
+				if(this.command.task == "reboot"){
+					console.log("[CMD] System going down for reboot");
+					exec("sudo reboot")
+				}
+				if(this.command.task == "shutdown"){
+					console.log("[CMD] System halt!");
+					exec("sudo halt")
+				}
 			}
 			break;
 	}
+}
+
+Action.allowSystemActions = function(){ //This method is used to enable system-actions
+	console.log("[INFO] System actions now enabled");
+	allowSystemActions = true;
 }
 
 module.exports = Action;

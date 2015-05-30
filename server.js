@@ -15,6 +15,7 @@ TimeManager = require("./timeManager.js");
 
 var PORT = 80;
 var UPDATEINTERVAL = 10000;
+var SYSTEMACTIONSDELAY = 300000;
 TimeManager.setLocation(59, 18);
 
 //------------------------
@@ -31,7 +32,8 @@ database.readFile();
 //Update database every 10 sec
 setInterval( function(){database.update()}, UPDATEINTERVAL);
 
-
+//Start allowing system actions after a delay
+setTimeout( function(){Action.allowSystemActions()}, SYSTEMACTIONSDELAY);
 
 //------------------------
 // WEBSERVER
