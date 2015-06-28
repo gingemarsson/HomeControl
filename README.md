@@ -1,25 +1,17 @@
 Home Control.
 ============
-Home Control is a simple website to control lights and devices in my home. All code is written in javascipt and runs in node.js on a Raspberry Pi with a tellstick.
+Home Control is a node.js application made to control lights and devices in my home. All code is written in javascipt and runs in node.js on a Raspberry Pi with a tellstick.
 
 This server uses these applications:
-- Apache CouchDB
 - Node.js
 - Express (Node.js webserver)
 
 The website uses:
 - jQuery
-- jQuery Mobile
 
-Planned features:
-==============
-- Hardware *(2013-10-03)*
-- Simple script to control nexa-switches *(2013-10-04)*
-- Simple website as user interface *(2013-10-04)*
-- Delayed commands *(2013-10-07)*
-- Planned commands *(2013-10-20)*
-- UI for planning "Planned commands" *(2013-11-08)*
-- UI to view and remove "Planned commands" *(2013-11-09)*
-- Website made for computers/bigger screens
-- Editing of "Planned commands"
-- Editing of Tellstick Units on the website (Admin interface)
+Features
+------------------------------------ 
+ - Run commands immedialy, aftar a delay or at a specific time.
+ - Planned actions are kept after restart.
+ - Planned actions can be repeated at custom intervals.
+ - The website is dynamicly generated from JSON data describing the structure.
