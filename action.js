@@ -25,7 +25,7 @@ function Action (command, delay, timedate, repeatInterval, dimLevel) {
 	
 	switch(this.command.type) {
 		case "tellstick":
-			this.command.task = String(this.command.task).replace(/[^onf]/g,"");
+			this.command.task = String(this.command.task).replace(/[^onfdim]/g,"");
 			this.command.id = String(this.command.id).replace(/[^0-9|a-z|A-Z]/g,"");
 			break;
 		case "system":
