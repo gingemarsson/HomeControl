@@ -53,7 +53,7 @@ app.use("/cmd" ,function(req, res, next){
 	actionsRaw.forEach(function(actionRaw) {
 		if(isNaN(actionRaw.timedate)) {actionRaw.timedate = TimeManager.getTime(actionRaw.timedate);}
 	
-		action = new Action(actionRaw.command, actionRaw.delay, actionRaw.timedate, actionRaw.repeatInterval);
+		action = new Action(actionRaw.command, actionRaw.delay, actionRaw.timedate, actionRaw.repeatInterval, actionRaw.dimLevel);
 				
 		//If the actions isn't executed, add it to the database
 		if(!action.execute(true)){ 
