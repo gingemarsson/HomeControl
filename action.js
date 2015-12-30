@@ -58,9 +58,15 @@ Action.prototype.execute = function() { //Check if the action should be executed
 Action.prototype._doAction = function(){ //This method contains the action-specific code that executes specific commands.
 	switch(this.command.type){
 		case "tellstick":
-			console.log("[CMD] tdtool --" + this.command.task + " " + this.command.id); //Log command
-			exec("tdtool --" + this.command.task + " " + this.command.id); //Execute command
-			break;
+            if (this.command.task == "dim") {
+                console.log("[CMD] tdtool --dimlevel" + this.command.dimlevel + " --dim " + this.command.id); //Log command
+                exec("[CMD] tdtool --dimlevel" + this.command.dimlevel + " --dim " + this.command.id); //Execute command
+            }
+            else {
+                console.log("[CMD] tdtool --" + this.command.task + " " + this.command.id); //Log command
+                exec("tdtool --" + this.command.task + " " + this.command.id); //Execute command
+            }
+            break;
 		case "system":
 			if (allowSystemActions) {
 				if(this.command.task == "checkDatabase"){
