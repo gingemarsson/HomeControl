@@ -61,7 +61,7 @@ Action.prototype._doAction = function(){ //This method contains the action-speci
 		case "tellstick":
             if (this.command.task == "dim") {
                 console.log("[CMD] tdtool --dimlevel " + this.command.dimlevel + " --dim " + this.command.id); //Log command
-                exec("[CMD] tdtool --dimlevel" + this.command.dimlevel + " --dim " + this.command.id); //Execute command
+                exec("tdtool --dimlevel" + this.command.dimlevel + " --dim " + this.command.id); //Execute command
             }
             else {
                 console.log("[CMD] tdtool --" + this.command.task + " " + this.command.id); //Log command
