@@ -28,7 +28,10 @@ function Action (command, delay, timedate, repeatInterval, dimLevel) {
 			this.command.task = String(this.command.task).replace(/[^onfdim]/g,"");
 			this.command.id = String(this.command.id).replace(/[^0-9|a-z|A-Z]/g,"");
 			break;
-		case "system":
+		case "wakeonlan":
+			this.command.mac = String(this.command.mac).replace(/[^0-9|A-F|:]/g,"");
+			break;
+    case "system":
 			this.command.task = String(this.command.task).replace(/[^0-9|a-z|A-Z]/g,"");
 			break;
 	}
@@ -68,7 +71,11 @@ Action.prototype._doAction = function(){ //This method contains the action-speci
                 exec("tdtool --" + this.command.task + " " + this.command.id); //Execute command
             }
             break;
-		case "system":
+		case "wakeonlan":
+      console.log("[CMD] sudo etherwake " + this.command.mac); //Log command
+      exec("sudo etherwake " + this.command.mac); //Execute command
+      break;
+    case "system":
 			if (allowSystemActions) {
 				if(this.command.task == "checkDatabase"){
 					database.update();
