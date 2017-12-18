@@ -16,10 +16,10 @@ var allowSystemActions = false;
 function Action (command, delay, timedate, repeatInterval, dimLevel) {
 
 	//Variables
-    this.delay = String(delay).replace(/[^0-9]/g,"");
+	this.delay = String(delay).replace(/[^0-9]/g,"");
 	this.timedate = String(timedate).replace(/[^0-9]/g,"");
 	this.repeatInterval = String(repeatInterval).replace(/[^0-9|a-z|A-Z]/g,"");
-    this.dimLevel = String(dimLevel).replace(/[^0-9]/g,"");
+	this.dimLevel = String(dimLevel).replace(/[^0-9]/g,"");
 	this.command = command;
 	
 	
@@ -31,7 +31,9 @@ function Action (command, delay, timedate, repeatInterval, dimLevel) {
 		case "wakeonlan":
 			this.command.mac = String(this.command.mac).replace(/[^0-9|A-F|:]/g,"");
 			break;
-    case "system":
+		case "webcam":
+			break;
+		case "system":
 			this.command.task = String(this.command.task).replace(/[^0-9|a-z|A-Z]/g,"");
 			break;
 	}
@@ -62,20 +64,24 @@ Action.prototype.execute = function() { //Check if the action should be executed
 Action.prototype._doAction = function(){ //This method contains the action-specific code that executes specific commands.
 	switch(this.command.type){
 		case "tellstick":
-            if (this.command.task == "dim") {
-                console.log("[CMD] tdtool --dimlevel " + this.command.dimlevel + " --dim " + this.command.id); //Log command
-                exec("tdtool --dimlevel " + this.command.dimlevel + " --dim " + this.command.id); //Execute command
-            }
-            else {
-                console.log("[CMD] tdtool --" + this.command.task + " " + this.command.id); //Log command
-                exec("tdtool --" + this.command.task + " " + this.command.id); //Execute command
-            }
-            break;
+			if (this.command.task == "dim") {
+				console.log("[CMD] tdtool --dimlevel " + this.command.dimlevel + " --dim " + this.command.id); //Log command
+				exec("tdtool --dimlevel " + this.command.dimlevel + " --dim " + this.command.id); //Execute command
+			}
+			else {
+				console.log("[CMD] tdtool --" + this.command.task + " " + this.command.id); //Log command
+				exec("tdtool --" + this.command.task + " " + this.command.id); //Execute command
+			}
+			break;
 		case "wakeonlan":
-      console.log("[CMD] sudo etherwake " + this.command.mac); //Log command
-      exec("sudo etherwake " + this.command.mac); //Execute command
-      break;
-    case "system":
+			console.log("[CMD] sudo etherwake " + this.command.mac); //Log command
+			exec("sudo etherwake " + this.command.mac); //Execute command
+			break;
+		case "webcam":
+			console.log("[CMD] streamer -f jpeg -o /home/pi/webcam/image.jpeg -s 1920x1080"); //Log command
+			exec("streamer -f jpeg -o /home/pi/webcam/image.jpeg -s 1920x1080"); //Execute command
+			break;
+		case "system":
 			if (allowSystemActions) {
 				if(this.command.task == "checkDatabase"){
 					database.update();
